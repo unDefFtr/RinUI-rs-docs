@@ -1,6 +1,75 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress'
 
 const currentYear = new Date().getFullYear()
+
+const enGuideSidebar: DefaultTheme.SidebarItem[] = [
+  {
+    text: 'Introduction',
+    items: [
+      { text: 'What is RinUI-rs?', link: '/guide/' },
+      { text: 'Getting Started', link: '/guide/getting-started' },
+      { text: 'Project Structure and Resources', link: '/guide/project-structure' },
+      { text: 'Configuration and Rust/QML Integration', link: '/guide/rust-host' },
+      { text: 'Runtime and Sessions', link: '/guide/runtime-sessions' },
+    ]
+  },
+  {
+    text: 'Core Features',
+    collapsed: true,
+    items: [
+      { text: 'Theme', link: '/core/theme' },
+      { text: 'Utils', link: '/core/utils' },
+      { text: 'Float Layer Manager', link: '/core/floatLayer' },
+      { text: 'Iconography', link: '/Design/Iconography.md' },
+    ]
+  }
+]
+
+const zhGuideSidebar: DefaultTheme.SidebarItem[] = [
+  {
+    text: '简介',
+    items: [
+      { text: '什么是 RinUI-rs？', link: '/zh/guide/' },
+      { text: '快速开始', link: '/zh/guide/getting-started' },
+      { text: '项目结构与资源', link: '/zh/guide/project-structure' },
+      { text: '配置与 Rust/QML 交互', link: '/zh/guide/rust-host' },
+      { text: 'Runtime 与 Session', link: '/zh/guide/runtime-sessions' },
+    ]
+  },
+  {
+    text: '核心功能',
+    collapsed: true,
+    items: [
+      { text: '主题', link: '/zh/core/theme' },
+      { text: '工具', link: '/zh/core/utils' },
+      { text: '浮层管理器', link: '/zh/core/floatLayer' },
+      { text: '图标', link: '/zh/Design/Iconography.md' },
+    ]
+  }
+]
+
+const jaGuideSidebar: DefaultTheme.SidebarItem[] = [
+  {
+    text: '紹介',
+    items: [
+      { text: 'RinUI-rs とは？', link: '/ja/guide/' },
+      { text: 'はじめに', link: '/ja/guide/getting-started' },
+      { text: 'プロジェクト構成とリソース', link: '/ja/guide/project-structure' },
+      { text: '設定と Rust/QML 連携', link: '/ja/guide/rust-host' },
+      { text: 'Runtime と Session', link: '/ja/guide/runtime-sessions' },
+    ]
+  },
+  {
+    text: 'コア機能',
+    collapsed: true,
+    items: [
+      { text: 'テーマ', link: '/ja/core/theme' },
+      { text: 'ユーティリティ', link: '/ja/core/utils' },
+      { text: 'フロートレイヤーマネージャー', link: '/ja/core/floatLayer' },
+      { text: 'アイコンビジュアル', link: '/ja/Design/Iconography.md' },
+    ]
+  }
+]
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -47,28 +116,9 @@ export default defineConfig({
 
         // sidebar
         sidebar: {
-          '/guide/': [
-            {
-              text: 'Introduction',
-              items: [
-                { text: 'What is RinUI-rs?', link: '/guide/' },
-                { text: 'Getting Started', link: '/guide/getting-started' },
-                { text: 'Project Structure and Resources', link: '/guide/project-structure' },
-                { text: 'Configuration and Rust/QML Integration', link: '/guide/rust-host' },
-                { text: 'Runtime and Sessions', link: '/guide/runtime-sessions' },
-              ]
-            },
-            {
-              text: 'Core Features',
-              collapsed: true,
-              items: [
-                { text: 'Theme', link: '/core/theme' },
-                { text: 'Utils', link: '/core/utils' },
-                { text: 'Float Layer Manager', link: '/core/floatLayer' },
-                { text: 'Iconography', link: '/Design/Iconography.md' },
-              ]
-            }
-          ],
+          '/guide/': enGuideSidebar,
+          '/core/': enGuideSidebar,
+          '/Design/': enGuideSidebar,
           '/': [
           {
             text: 'Styles',
@@ -222,28 +272,9 @@ export default defineConfig({
 
         // 侧边栏
         sidebar: {
-          '/zh/guide/': [
-            {
-              text: '简介',
-              items: [
-                { text: '什么是 RinUI-rs？', link: '/zh/guide/' },
-                { text: '快速开始', link: '/zh/guide/getting-started' },
-                { text: '项目结构与资源', link: '/zh/guide/project-structure' },
-                { text: '配置与 Rust/QML 交互', link: '/zh/guide/rust-host' },
-                { text: 'Runtime 与 Session', link: '/zh/guide/runtime-sessions' },
-              ]
-            },
-            {
-              text: '核心功能',
-              collapsed: true,
-              items: [
-                { text: '主题', link: '/zh/core/theme' },
-                { text: '工具', link: '/zh/core/utils' },
-                { text: '浮层管理器', link: '/zh/core/floatLayer' },
-                { text: '图标', link: '/zh/Design/Iconography.md' }
-              ]
-            }
-          ],
+          '/zh/guide/': zhGuideSidebar,
+          '/zh/core/': zhGuideSidebar,
+          '/zh/Design/': zhGuideSidebar,
           '/zh/': [
           {
             text: '样式',
@@ -397,28 +428,9 @@ export default defineConfig({
 
         // 侧边栏
         sidebar: {
-          '/ja/guide/': [
-            {
-              text: '紹介',
-              items: [
-                { text: 'RinUI-rs とは？', link: '/ja/guide/' },
-                { text: 'はじめに', link: '/ja/guide/getting-started' },
-                { text: 'プロジェクト構成とリソース', link: '/ja/guide/project-structure' },
-                { text: '設定と Rust/QML 連携', link: '/ja/guide/rust-host' },
-                { text: 'Runtime と Session', link: '/ja/guide/runtime-sessions' },
-              ]
-            },
-            {
-              text: 'コア機能',
-              collapsed: true,
-              items: [
-                { text: 'テーマ', link: '/ja/core/theme' },
-                { text: 'ユーティリティ', link: '/ja/core/utils' },
-                { text: 'フロートレイヤーマネージャー', link: '/ja/core/floatLayer' },
-                { text: 'アイコンビジュアル', link: '/ja/Design/Iconography.md' }
-              ]
-            }
-          ],
+          '/ja/guide/': jaGuideSidebar,
+          '/ja/core/': jaGuideSidebar,
+          '/ja/Design/': jaGuideSidebar,
           '/ja/': [
           {
             text: 'スタイル',

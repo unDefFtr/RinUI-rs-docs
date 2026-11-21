@@ -28,6 +28,8 @@ npm run docs:build
 npm run docs:preview
 ```
 
+The Guide sidebar is shared by the `guide/`, `core/`, and `Design/` routes for each locale. When adding a Guide article under a new route prefix, map that prefix to the same localized sidebar in `docs/.vitepress/config.mts`.
+
 The Rust examples expect a complete `rinui-rs` checkout beside the example application, including its upstream submodule. See the getting-started guides for Qt and C++ requirements.
 
 ## Attribution and license
