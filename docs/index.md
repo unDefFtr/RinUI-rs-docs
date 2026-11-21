@@ -141,4 +141,10 @@ Continue with:
 
 RinUI-rs is maintained by [unDefFtr](https://github.com/unDefFtr/rinui-rs). QML controls, reused documentation and images: upstream RinUI by RinLit and contributors. Screenshots illustrate upstream QML components.
 
-[![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
+### Upstream Rin-UI contributors
+
+[![Upstream Rin-UI contributors](https://contrib.rocks/image?repo=RinLit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
+
+### rinui-rs contributors
+
+[![rinui-rs contributors](https://contrib.rocks/image?repo=unDefFtr/rinui-rs)](https://github.com/unDefFtr/rinui-rs/graphs/contributors)

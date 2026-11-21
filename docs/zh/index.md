@@ -142,4 +142,10 @@ fn main() -> ExitCode {
 
 RinUI-rs 由 [unDefFtr](https://github.com/unDefFtr/rinui-rs) 维护。QML 控件及沿用的文档、图片来自 RinLit 与上游 RinUI 贡献者；截图用于展示上游 QML 组件。
 
-[![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
+### 上游 Rin-UI 贡献者
+
+[![上游 Rin-UI 贡献者](https://contrib.rocks/image?repo=RinLit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)
+
+### rinui-rs 贡献者
+
+[![rinui-rs 贡献者](https://contrib.rocks/image?repo=unDefFtr/rinui-rs)](https://github.com/unDefFtr/rinui-rs/graphs/contributors)
