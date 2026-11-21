@@ -1,6 +1,6 @@
 # FluentWindow（Fluent 窗口）
 
-`FluentWindow` 是 RinUI 为桌面应用准备的窗口入口。它在 `FluentWindowBase` 的标题栏、窗口边框和背景效果之上，组合好了 `NavigationView` 和页面内容区域。使用它时，通常只需要声明窗口尺寸、`navigationItems` 和各个页面。
+`FluentWindow` 是 rinui-rs 的桌面应用窗口入口。它在 `FluentWindowBase` 的标题栏、窗口边框和背景效果之上，组合好了 `NavigationView` 和页面内容区域。使用它时，通常只需要声明窗口尺寸、`navigationItems` 和各个页面。
 
 <VPImage
   :image="{
@@ -97,7 +97,7 @@ FluentWindow {
 
 ## 窗口外观
 
-RinUI 的窗口背景、圆角、边框和主题变化由 `FluentWindowBase` 统一处理。Windows 上可以结合 Mica、Acrylic、Tabbed 或 None 背景；macOS 在 Rust 宿主中默认使用 QML 自绘标题栏控件，也可显式启用原生窗口框架；其他系统回退到普通窗口背景。
+窗口背景、圆角、边框和主题变化由 `FluentWindowBase` 统一处理。Windows 上可以结合 Mica、Acrylic、Tabbed 或 None 背景；macOS 上 rinui-rs 默认使用 QML 自绘标题栏控件，也可显式启用原生窗口框架；其他系统回退到普通窗口背景。
 
 更多主题调用参见[主题系统](/zh/core/theme)。
 

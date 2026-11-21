@@ -89,7 +89,7 @@ Column {
 ```
 ```
 
-> Note: The example in `Rin-UI/examples/pages/controls/CheckBox.qml` provides a complete implementation for grouped checkboxes using `ButtonGroup`.
+> Note: The upstream RinUI example at `Rin-UI/examples/pages/controls/CheckBox.qml` provides a complete implementation for grouped checkboxes using `ButtonGroup`.
 
 ## Key Properties
 

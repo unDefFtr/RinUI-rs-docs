@@ -89,7 +89,7 @@ Column {
 ```
 ```
 
-> 注：`Rin-UI/examples/pages/controls/CheckBox.qml` の例では、`ButtonGroup` を使用したグループ化されたチェックボックスの完全な実装が提供されています。
+> 注：上流 RinUI の `Rin-UI/examples/pages/controls/CheckBox.qml` には、`ButtonGroup` を使ってチェックボックスをグループ化する完全なサンプルがあります。
 
 ## 主なプロパティ
 

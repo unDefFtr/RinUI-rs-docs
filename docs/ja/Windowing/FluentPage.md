@@ -1,6 +1,6 @@
 # FluentPage（Fluent ページ）
 
-`FluentPage` は RinUI の標準ページコンテナです。Qt Quick `Page` を基に、ページタイトル、スクロール、コンテンツ幅、余白、オプションのフッターを統一します。`NavigationView` のページルートとして使用するのに適しています。
+`FluentPage` は標準ページコンテナです。Qt Quick `Page` を基に、ページタイトル、スクロール、コンテンツ幅、余白、オプションのフッターを統一します。`NavigationView` のページルートとして使用するのに適しています。
 
 <VPImage
   :image="{

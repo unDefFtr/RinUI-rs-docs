@@ -1,6 +1,6 @@
 # FluentWindow
 
-`FluentWindow` is the standard desktop window entry point in RinUI. It builds on `FluentWindowBase` for the title bar, window frame, and backdrop effects, and combines that with a `NavigationView` and page content area. In most applications, you only need to set the window size, `navigationItems`, and the pages themselves.
+`FluentWindow` is the standard desktop window entry point in rinui-rs. It builds on `FluentWindowBase` for the title bar, window frame, and backdrop effects, and combines that with a `NavigationView` and page content area. In most applications, you only need to set the window size, `navigationItems`, and the pages themselves.
 
 <VPImage
   :image="{
@@ -93,7 +93,7 @@ FluentWindow {
 
 ## Window Appearance
 
-`FluentWindowBase` handles the window background, corner radius, border, and theme changes. On Windows, RinUI can use Mica, Acrylic, Tabbed, or no backdrop; macOS defaults to QML titlebar controls in the Rust host, with optional native framing; other systems fall back to a normal window background.
+`FluentWindowBase` handles the window background, corner radius, border, and theme changes. On Windows, applications can use Mica, Acrylic, Tabbed, or no backdrop; on macOS, rinui-rs defaults to QML titlebar controls, with optional native framing; other systems fall back to a normal window background.
 
 See [Theme](/core/theme) for theme calls.
 

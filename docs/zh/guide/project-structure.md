@@ -105,6 +105,6 @@ bash scripts/package_linux.sh
 - 缺少 Qt 平台插件或 Qt5Compat 模块：发布包中需携带 Qt 插件与 QML 模块。
 - Qt Quick 尺寸与 `font.pixelSize` 已使用逻辑像素，不要乘 `Utils.dpiScale`；`Utils.dp()` 是已弃用的恒等辅助函数。
 
-参见[主题系统](/zh/core/theme)、[辅助工具](/zh/core/utils)和 [Rust Host 接入](rust-host)。
+参见[主题系统](/zh/core/theme)、[辅助工具](/zh/core/utils)和 [配置与 Rust/QML 交互](rust-host)。
 
 [rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)

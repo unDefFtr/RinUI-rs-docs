@@ -96,7 +96,7 @@ ComboBox {
     }
 }
 ```
-> 注意：有关更详细的示例，请参阅 `Rin-UI/examples/pages/controls/ComboBox.qml`。
+> 注意：有关更详细的示例，请参阅上游 RinUI 的 `Rin-UI/examples/pages/controls/ComboBox.qml`。
 
 ## 主要属性
 

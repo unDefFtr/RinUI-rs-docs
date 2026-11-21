@@ -45,7 +45,7 @@ Column {
 }
 
 ```
-> 注意：`Rin-UI/examples/pages/controls/RadioButton.qml` 中的示例显示了多个 RadioButton。为使它们互斥，请将它们分配给同一个 `ButtonGroup`。
+> 注意：上游 RinUI 的 `Rin-UI/examples/pages/controls/RadioButton.qml` 示例显示了多个 RadioButton。为使它们互斥，请将它们分配给同一个 `ButtonGroup`。
 
 ## 主要属性
 

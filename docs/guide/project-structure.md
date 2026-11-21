@@ -105,6 +105,6 @@ These scripts target the Gallery and assemble Qt libraries, plugins, QML runtime
 - Missing Qt platform plugin or Qt5Compat module: deploy Qt's plugins and QML modules alongside the application.
 - Qt Quick dimensions and `font.pixelSize` already use logical pixels. Do not multiply by `Utils.dpiScale`; `Utils.dp()` is a deprecated identity helper.
 
-See [Theme](/core/theme), [Utils](/core/utils) and [Rust Host integration](rust-host).
+See [Theme](/core/theme), [Utils](/core/utils) and [Configuration and Rust/QML Integration](rust-host).
 
 [rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)

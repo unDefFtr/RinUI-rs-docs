@@ -1,10 +1,10 @@
 # Utility Tools (`Utils`)
 
-`RinUIHost` initializes the Rust theme backend that supplies persisted colors to `Utils`. See [Rust Host integration](/guide/rust-host) for configuration. The default stored accent is `#605ed2`; application fonts and icons remain QML resources.
+`RinUIHost` initializes the Rust theme backend that supplies persisted colors to `Utils`. See [Configuration and Rust/QML Integration](/guide/rust-host) for configuration. The default stored accent is `#605ed2`; application fonts and icons remain QML resources.
 
 ## Overview
 
-RinUI provides a singleton object `Utils`, used to manage global resources, fonts, and animation durations. This is an indispensable auxiliary module in RinUI applications. You can modify the values of these properties to customize the appearance and behavior of RinUI.
+`Utils` is a QML singleton for global resources, fonts, and animation durations. Modify its properties to customize the appearance and behavior of your application.
 
 You can use the utility tools `Utils` like this:
 ```qml
@@ -14,7 +14,7 @@ import RinUI
 Text {
     font.family: Utils.fontFamily
     font.pixelSize: 14
-    text: "RinUI"
+    text: "rinui-rs"
 }
 ```
 
@@ -22,7 +22,7 @@ Text {
 | Property                   | Description                                                                                                                                                                                                                          |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | primaryColor               | Theme primary color, default reads the backend configuration file default value `#605ed2` <br/> It is recommended to modify the theme color through [`Theme.setThemeColor(color)`](/core/theme#modes-and-accent-color)                    |
-| colors                     | The color table of the currently selected theme in RinUI, all controls in RinUI will reference these colors                                                                                                                          |
+| colors                     | The color table of the current theme, shared by all controls                                                                                                                          |
 | appearance                 | Appearance settings of the current theme (such as rounded corners, shadows, opacity)                                                                                                                                                 |
 | typography                 | Currently only stores font size information                                                                                                                                                                                          |
 
@@ -58,7 +58,7 @@ Text {
     width: 320
     height: 48
     font.pixelSize: 14
-    text: "RinUI"
+    text: "rinui-rs"
 }
 ```
 

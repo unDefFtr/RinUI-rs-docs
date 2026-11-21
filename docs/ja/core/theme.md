@@ -24,7 +24,7 @@ Item {
 | `Theme.setThemeColor(color)` | 16 進文字列または QML color でアクセントを設定。 |
 | `Theme.getThemeColor()` | 現在の QML color。初期化前は `"transparent"`。 |
 
-`HostConfig.config_location` でテーマ設定の保存方法を指定します。保存設定と Rust からの呼び出しは [Rust Host の統合](/ja/guide/rust-host)を参照してください。
+`HostConfig.config_location` でテーマ設定の保存方法を指定します。保存設定と Rust からの呼び出しは [設定と Rust/QML 連携](/ja/guide/rust-host)を参照してください。
 
 ## Windows の背景効果
 
@@ -37,6 +37,6 @@ Item {
 | Tabbed | Windows 11 22H2 以降。Windows 11 21H2 では Mica にフォールバック。 |
 | None | Windows の背景材質を無効化。他の OS は通常の背景を使用。 |
 
-Rust からの背景効果の設定と戻り値は [Rust Host の統合](/ja/guide/rust-host)を参照してください。
+Rust からの背景効果の設定と戻り値は [設定と Rust/QML 連携](/ja/guide/rust-host)を参照してください。
 
 [FluentWindow](/ja/Windowing/FluentWindow)、[プロジェクト構成とリソース](/ja/guide/project-structure)も参照してください。

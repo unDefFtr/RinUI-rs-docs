@@ -24,7 +24,7 @@ Item {
 | `Theme.setThemeColor(color)` | 以十六进制字符串或 QML color 值设置强调色。 |
 | `Theme.getThemeColor()` | 当前 QML color，后端未初始化时返回 `"transparent"`。 |
 
-`HostConfig.config_location` 控制主题设置的存储方式。存储配置与 Rust 调用方式见 [Rust Host 接入](/zh/guide/rust-host)。
+`HostConfig.config_location` 控制主题设置的存储方式。存储配置与 Rust 调用方式见 [配置与 Rust/QML 交互](/zh/guide/rust-host)。
 
 ## Windows 背景效果
 
@@ -37,6 +37,6 @@ Item {
 | Tabbed | Windows 11 22H2+；Windows 11 21H2 请求时回退为 Mica。 |
 | None | 关闭 Windows 背景材质；其他平台使用正常背景。 |
 
-Rust 背景效果的调用方式与返回码见 [Rust Host 接入](/zh/guide/rust-host#windows-背景与窗口配置)。
+Rust 背景效果的调用方式与返回码见 [配置与 Rust/QML 交互](/zh/guide/rust-host#windows-背景与窗口配置)。
 
 参见 [FluentWindow](/zh/Windowing/FluentWindow) 和[项目结构与资源](/zh/guide/project-structure)。

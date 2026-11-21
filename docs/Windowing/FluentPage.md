@@ -1,6 +1,6 @@
 # FluentPage
 
-`FluentPage` is the standard content container in RinUI. It extends Qt Quick `Page` with consistent page titles, scrolling, content width, padding, and optional footers, making it suitable as the root of a `NavigationView` page.
+`FluentPage` is the standard page content container. It extends Qt Quick `Page` with consistent page titles, scrolling, content width, padding, and optional footers, making it suitable as the root of a `NavigationView` page.
 
 <VPImage
   :image="{

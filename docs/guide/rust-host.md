@@ -1,4 +1,4 @@
-# Rust Host Integration
+# Configuration and Rust/QML Integration
 
 This guide builds on the application from [Getting Started](getting-started) to demonstrate configuration, themes, translation and Rust/QML interaction.
 
@@ -50,7 +50,7 @@ fn run() -> Result<i32, Box<dyn std::error::Error>> {
     host.set_root_property(
         loaded.root_id,
         "title",
-        &QVariant::from(&QString::from("Rust Host integration")),
+        &QVariant::from(&QString::from("rinui-rs integration")),
     )?;
     let title = host.get_root_property(loaded.root_id, "title")?;
     let sum = host.invoke_root_method(

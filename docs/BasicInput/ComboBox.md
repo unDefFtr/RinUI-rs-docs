@@ -100,7 +100,7 @@ ComboBox {
     }
 }
 ```
-> Refer to `Rin-UI/examples/pages/controls/ComboBox.qml` for more detailed examples.
+> Refer to the upstream RinUI example at `Rin-UI/examples/pages/controls/ComboBox.qml` for more detailed examples.
 
 ## Key Properties
 

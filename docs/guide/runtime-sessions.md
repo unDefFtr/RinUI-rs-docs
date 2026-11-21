@@ -79,6 +79,6 @@ Before loading QML, use `session.configure_engine(...)` for import/plugin paths,
 
 Use `sync_windows()` to discover dynamically created RinUI windows and `register_window_from_property(root_id, name)` when explicit attribution is needed. Root/window IDs belong to their owning session; using one from a sibling returns an ownership error. Prefer session APIs that return `Result` when handling errors is essential. Do not retain theme guards across QML callbacks or event-loop entry.
 
-See [Rust Host integration](rust-host) and [Project Structure and Resources](project-structure).
+See [Configuration and Rust/QML Integration](rust-host) and [Project Structure and Resources](project-structure).
 
 [Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)

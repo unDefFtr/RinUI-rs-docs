@@ -1,6 +1,6 @@
 # NavigationView（导航视图）
 
-`NavigationView` 由垂直导航栏、页面栈和内容卡片组成，负责 RinUI 应用中的顶层页面切换。`FluentWindow` 已内置一个 `NavigationView`，通常不需要手动创建；在自定义窗口或嵌入式布局中才需要单独使用。
+`NavigationView` 由垂直导航栏、页面栈和内容卡片组成，负责应用中的顶层页面切换。`FluentWindow` 已内置一个 `NavigationView`，通常不需要手动创建；在自定义窗口或嵌入式布局中才需要单独使用。
 
 启动时会优先加载 `defaultPage`；若未设置，则加载 `navigationItems` 第一项的 `page`。因此至少要提供一个有效页面，不能把页面路径留作不存在的示例文件。
 

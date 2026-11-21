@@ -45,7 +45,7 @@ Column {
 }
 
 ```
-> Note: The example in `Rin-UI/examples/pages/controls/RadioButton.qml` shows multiple RadioButtons. For them to be mutually exclusive, assign them to the same `ButtonGroup`.
+> Note: The upstream RinUI example at `Rin-UI/examples/pages/controls/RadioButton.qml` shows multiple RadioButtons. For them to be mutually exclusive, assign them to the same `ButtonGroup`.
 
 ## Key Properties
 

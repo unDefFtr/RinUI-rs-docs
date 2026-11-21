@@ -1,8 +1,8 @@
 # Getting Started
 
-## Run the Rust Gallery
+## Run the rinui-rs Gallery
 
-Run the Gallery to explore RinUI controls and interactive examples.
+Run rinui-rs Gallery to explore the controls and interactive examples.
 
 <GalleryCarousel section="guide" :show-copy="false" />
 
@@ -107,7 +107,7 @@ FluentWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Rust + RinUI")
+    title: qsTr("rinui-rs")
 
     Button {
         anchors.centerIn: parent
@@ -131,6 +131,6 @@ The `CARGO_MANIFEST_DIR` path is convenient for source development. A distribute
 
 ## Next steps
 
-- [Rust Host integration](rust-host): configuration, theme, translation and Rust/QML interaction.
+- [Configuration and Rust/QML Integration](rust-host): configuration, theme, translation and Rust/QML interaction.
 - [Runtime and Sessions](runtime-sessions): multiple engines and existing Qt applications.
 - [FluentWindow](/Windowing/FluentWindow): window and navigation controls.

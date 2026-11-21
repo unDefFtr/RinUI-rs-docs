@@ -1,8 +1,8 @@
 # はじめに
 
-## Rust Gallery を実行する
+## rinui-rs Gallery を実行する
 
-Gallery を実行して、RinUI コントロールとインタラクティブなサンプルを確認できます。
+rinui-rs Gallery を実行して、コントロールとインタラクティブなサンプルを確認できます。
 
 <GalleryCarousel section="guide" :show-copy="false" />
 
@@ -107,7 +107,7 @@ FluentWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Rust + RinUI")
+    title: qsTr("rinui-rs")
 
     Button {
         anchors.centerIn: parent
@@ -131,6 +131,6 @@ cargo run
 
 ## 次のステップ
 
-- [Rust Host の統合](rust-host)：設定、テーマ、翻訳、Rust/QML 連携。
+- [設定と Rust/QML 連携](rust-host)：設定、テーマ、翻訳、Rust/QML 連携。
 - [Runtime と Session](runtime-sessions)：複数エンジンと既存 Qt アプリへの接続。
 - [FluentWindow](/ja/Windowing/FluentWindow)：ウィンドウとナビゲーション。

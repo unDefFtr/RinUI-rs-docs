@@ -79,6 +79,6 @@ fn integrate(app: &QGuiApplication) -> Result<(), Box<dyn std::error::Error>> {
 
 `sync_windows()` 可发现动态创建的 RinUI 窗口；需要显式归属时使用 `register_window_from_property(root_id, name)`。根对象／窗口 ID 属于创建它的 Session，跨 Session 使用会返回归属错误。需要严格处理错误时优先使用返回 `Result` 的 Session API；不要跨 QML 回调或事件循环入口持有主题 guard。
 
-参见 [Rust Host 接入](rust-host)和[项目结构与资源](project-structure)。
+参见 [配置与 Rust/QML 交互](rust-host)和[项目结构与资源](project-structure)。
 
 [Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)

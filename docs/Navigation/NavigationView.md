@@ -1,6 +1,6 @@
 # NavigationView
 
-`NavigationView` combines a vertical navigation bar, page stack, and content card. It handles top-level page navigation in RinUI applications. `FluentWindow` already contains one, so manual creation is only needed for custom windows or embedded layouts.
+`NavigationView` combines a vertical navigation bar, page stack, and content card. It handles top-level page navigation in applications. `FluentWindow` already contains one, so manual creation is only needed for custom windows or embedded layouts.
 
 ## Using It in FluentWindow
 

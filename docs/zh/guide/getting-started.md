@@ -1,8 +1,8 @@
 # 快速开始
 
-## 运行 Rust Gallery
+## 运行 rinui-rs Gallery
 
-运行 Gallery，浏览 RinUI 控件并体验交互示例。
+运行 rinui-rs Gallery，浏览控件并体验交互示例。
 
 <GalleryCarousel section="guide" :show-copy="false" />
 
@@ -107,7 +107,7 @@ FluentWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Rust + RinUI")
+    title: qsTr("rinui-rs")
 
     Button {
         anchors.centerIn: parent
@@ -131,6 +131,6 @@ cargo run
 
 ## 继续阅读
 
-- [Rust Host 接入](rust-host)：配置、主题、翻译和 Rust/QML 交互。
+- [配置与 Rust/QML 交互](rust-host)：配置、主题、翻译和 Rust/QML 交互。
 - [Runtime 与 Session](runtime-sessions)：多引擎与已有 Qt 应用接入。
 - [FluentWindow](/zh/Windowing/FluentWindow)：窗口与导航控件。

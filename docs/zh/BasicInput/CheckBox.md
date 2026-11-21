@@ -85,7 +85,7 @@ Column {
     }
 }
 ```
-> 注意：`Rin-UI/examples/pages/controls/CheckBox.qml` 中的示例提供了使用 `ButtonGroup` 实现复选框组的完整实现。
+> 注意：上游 RinUI 的 `Rin-UI/examples/pages/controls/CheckBox.qml` 提供了使用 `ButtonGroup` 实现复选框组的完整示例。
 
 ## 主要属性
 

@@ -79,6 +79,6 @@ QML 読み込み前に `session.configure_engine(...)` で import／plugin パ�
 
 `sync_windows()` で動的な RinUI ウィンドウを検出できます。明示的な帰属には `register_window_from_property(root_id, name)` を使います。ルート／ウィンドウ ID は所有 Session に属し、別 Session での使用はエラーです。エラー処理が必要なら `Result` を返す Session API を優先し、QML コールバックやイベントループ開始をまたいでテーマ guard を保持しないでください。
 
-[Rust Host の統合](rust-host)、[プロジェクト構成とリソース](project-structure)も参照してください。
+[設定と Rust/QML 連携](rust-host)、[プロジェクト構成とリソース](project-structure)も参照してください。
 
 [Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)

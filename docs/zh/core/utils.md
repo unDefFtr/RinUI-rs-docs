@@ -1,10 +1,10 @@
 # 辅助工具（`Utils`）
 
-`RinUIHost` 初始化 Rust 主题后端，向 `Utils` 提供持久化颜色。配置方式见 [Rust Host 接入](/zh/guide/rust-host)。默认配置强调色为 `#605ed2`，字体与图标仍通过 QML 资源提供。
+`RinUIHost` 初始化 Rust 主题后端，向 `Utils` 提供持久化颜色。配置方式见 [配置与 Rust/QML 交互](/zh/guide/rust-host)。默认配置强调色为 `#605ed2`，字体与图标仍通过 QML 资源提供。
 
 ## 概述
 
-RinUI 提供了一个名为 `Utils` 的单例对象，用于管理全局通用资源、字体和动画时长等。这是 RinUI 应用中不可或缺的辅助模块。您可以修改这些属性的值来自定义 RinUI 的外观和行为。
+`Utils` 是用于管理全局资源、字体和动画时长的 QML 单例。修改其属性可自定义应用的外观和行为。
 
 您可以像这样使用辅助工具`Utils`：
 ```qml
@@ -14,7 +14,7 @@ import RinUI
 Text {
     font.family: Utils.fontFamily
     font.pixelSize: 14
-    text: "RinUI"
+    text: "rinui-rs"
 }
 ```
 
@@ -22,7 +22,7 @@ Text {
 | 属性           | 	说明                                                                                                                                   |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | primaryColor | 	主题主色，默认读取后端的配置文件默认值 `#605ed2` <br/> 建议通过 [`Theme.setThemeColor(color)`](/zh/core/theme.md#modes-and-accent-color) 修改主题色        |
-| colors       | 	RinUI 当前选定主题的颜色表，RinUI 的所有控件的颜色都会引用                                                                                                  |
+| colors       | 	当前主题的颜色表，供所有控件引用                                                                                                  |
 | appearance   | 	当前主题的外观设定（如圆角、阴影、透明度）                                                                                                                |
 | typography   | 	目前仅存储字体的大小信息                                                                                                                         |
 
@@ -58,7 +58,7 @@ Text {
     width: 320
     height: 48
     font.pixelSize: 14
-    text: "RinUI"
+    text: "rinui-rs"
 }
 ```
 

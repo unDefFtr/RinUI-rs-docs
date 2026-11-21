@@ -1,6 +1,6 @@
 # FluentWindow（Fluent ウィンドウ）
 
-`FluentWindow` は RinUI のデスクトップアプリケーション向け標準ウィンドウです。`FluentWindowBase` のタイトルバー、ウィンドウ枠、背景効果に、`NavigationView` とページコンテンツ領域を組み合わせています。通常はウィンドウサイズ、`navigationItems`、各ページを宣言するだけで使用できます。
+`FluentWindow` は rinui-rs のデスクトップアプリケーション向け標準ウィンドウです。`FluentWindowBase` のタイトルバー、ウィンドウ枠、背景効果に、`NavigationView` とページコンテンツ領域を組み合わせています。通常はウィンドウサイズ、`navigationItems`、各ページを宣言するだけで使用できます。
 
 <VPImage
   :image="{
@@ -91,7 +91,7 @@ FluentWindow {
 
 ## ウィンドウの外観
 
-背景、角丸、枠線、テーマ変更は `FluentWindowBase` が処理します。Windows では Mica、Acrylic、Tabbed、背景なしを選択できます。macOS の Rust ホストは既定で QML タイトルバーを使用し、ネイティブフレームも選択でき、その他のシステムでは通常のウィンドウ背景にフォールバックします。
+背景、角丸、枠線、テーマ変更は `FluentWindowBase` が処理します。Windows では Mica、Acrylic、Tabbed、背景なしを選択できます。macOS では rinui-rs が既定で QML タイトルバーを使用し、ネイティブフレームも選択でき、その他のシステムでは通常のウィンドウ背景にフォールバックします。
 
 テーマについては[テーマシステム](/ja/core/theme)を参照してください。
 

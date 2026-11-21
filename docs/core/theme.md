@@ -24,7 +24,7 @@ Item {
 | `Theme.setThemeColor(color)` | Set the accent with a hex string or QML color value. |
 | `Theme.getThemeColor()` | Current QML color; `"transparent"` before backend initialization. |
 
-`HostConfig.config_location` controls how theme settings are stored. For storage configuration and Rust calls, see [Rust Host integration](/guide/rust-host).
+`HostConfig.config_location` controls how theme settings are stored. For storage configuration and Rust calls, see [Configuration and Rust/QML Integration](/guide/rust-host).
 
 ## Windows backdrop effects
 
@@ -37,6 +37,6 @@ Use `Theme.setBackdropEffect(Theme.effect.Mica / Acrylic / Tabbed / None)` after
 | Tabbed | Windows 11 22H2+; requests on Windows 11 21H2 fall back to Mica. |
 | None | Disables Windows background material. Other platforms use their normal background. |
 
-For Rust backdrop calls and return codes, see [Rust Host integration](/guide/rust-host#windows-backdrops-and-window-configuration).
+For Rust backdrop calls and return codes, see [Configuration and Rust/QML Integration](/guide/rust-host#windows-backdrops-and-window-configuration).
 
 See [FluentWindow](/Windowing/FluentWindow) and [Project Structure and Resources](/guide/project-structure).

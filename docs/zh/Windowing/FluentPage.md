@@ -1,6 +1,6 @@
 # FluentPage（Fluent 页面）
 
-`FluentPage` 是 RinUI 页面内容的标准容器。它基于 Qt Quick `Page`，统一处理页面标题、滚动区域、内容宽度、内边距和可选页脚，适合作为 `NavigationView` 中的页面根节点。
+`FluentPage` 是页面内容的标准容器。它基于 Qt Quick `Page`，统一处理页面标题、滚动区域、内容宽度、内边距和可选页脚，适合作为 `NavigationView` 中的页面根节点。
 
 <VPImage
   :image="{

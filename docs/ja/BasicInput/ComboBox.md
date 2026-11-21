@@ -97,7 +97,7 @@ ComboBox {
     }
 }
 ```
-> 注：詳細な例については、`Rin-UI/examples/pages/controls/ComboBox.qml` を参照してください。
+> 注：詳細な例については、上流 RinUI のサンプル `Rin-UI/examples/pages/controls/ComboBox.qml` を参照してください。
 
 ## 主なプロパティ
 

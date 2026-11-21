@@ -1,4 +1,4 @@
-# Rust Host 接入
+# 配置与 Rust/QML 交互
 
 本文基于[快速开始](getting-started)的工程，介绍配置、主题、翻译和 Rust/QML 交互。
 
@@ -50,7 +50,7 @@ fn run() -> Result<i32, Box<dyn std::error::Error>> {
     host.set_root_property(
         loaded.root_id,
         "title",
-        &QVariant::from(&QString::from("Rust Host integration")),
+        &QVariant::from(&QString::from("rinui-rs integration")),
     )?;
     let title = host.get_root_property(loaded.root_id, "title")?;
     let sum = host.invoke_root_method(

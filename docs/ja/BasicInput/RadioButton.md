@@ -45,7 +45,7 @@ Column {
 }
 
 ```
-> 注：`Rin-UI/examples/pages/controls/RadioButton.qml` の例には複数の RadioButton が表示されています。それらを相互に排他的にするには、同じ `ButtonGroup` に割り当てます。
+> 注：上流 RinUI の `Rin-UI/examples/pages/controls/RadioButton.qml` には、複数の RadioButton を使うサンプルがあります。それらを相互に排他的にするには、同じ `ButtonGroup` に割り当てます。
 
 ## 主なプロパティ
 

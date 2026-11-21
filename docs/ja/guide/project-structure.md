@@ -105,6 +105,6 @@ bash scripts/package_linux.sh
 - Qt プラットフォームプラグインや Qt5Compat がない：Qt プラグインと QML モジュールを配布物に含めます。
 - Qt Quick の寸法と `font.pixelSize` は論理ピクセルです。`Utils.dpiScale` を掛けないでください。`Utils.dp()` は非推奨の恒等関数です。
 
-[テーマ](/ja/core/theme)、[ユーティリティ](/ja/core/utils)、[Rust Host の統合](rust-host)も参照してください。
+[テーマ](/ja/core/theme)、[ユーティリティ](/ja/core/utils)、[設定と Rust/QML 連携](rust-host)も参照してください。
 
 [rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)

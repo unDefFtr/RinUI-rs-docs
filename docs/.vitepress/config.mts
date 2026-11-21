@@ -5,7 +5,7 @@ const currentYear = new Date().getFullYear()
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "rinui-rs Documentation",
-  description: "rinui-rs Rust Host and RinUI Qt Quick (QML) component documentation",
+  description: "Build Fluent-style desktop applications with rinui-rs, Rust and Qt Quick (QML)",
   head: [
       ['link', { rel: 'icon', href: '/assets/images/brand/rinui-mark-light.png' }]  // 添加网站图标
   ],
@@ -29,7 +29,7 @@ export default defineConfig({
       title: "rinui-rs Documentation",
 
       themeConfig: {
-        siteTitle: 'Rust Host Documentation',
+        siteTitle: 'rinui-rs Documentation',
         // 导航
         nav: [
           { text: 'Home', link: '/' },
@@ -37,9 +37,9 @@ export default defineConfig({
           { text: 'Components', link: '/components/' },
           { text: 'v0.1.0-alpha.1', items: [
             { text: 'Release notes', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
-            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
+            { text: 'rinui-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: 'Rust Gallery', items: [
+          { text: 'rinui-rs Gallery', items: [
             { text: 'Build from source', link: '/guide/getting-started' },
             { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
@@ -54,12 +54,12 @@ export default defineConfig({
                 { text: 'What is rinui-rs?', link: '/guide/' },
                 { text: 'Getting Started', link: '/guide/getting-started' },
                 { text: 'Project Structure and Resources', link: '/guide/project-structure' },
-                { text: 'Rust Host Integration', link: '/guide/rust-host' },
+                { text: 'Configuration and Rust/QML Integration', link: '/guide/rust-host' },
                 { text: 'Runtime and Sessions', link: '/guide/runtime-sessions' },
               ]
             },
             {
-              text: 'RinUI Core',
+              text: 'Core Features',
               collapsed: true,
               items: [
                 { text: 'Theme', link: '/core/theme' },
@@ -201,9 +201,10 @@ export default defineConfig({
       label: "简体中文",
       lang: "zh",
       title: 'rinui-rs 开发文档',
+      description: '使用 rinui-rs、Rust 与 Qt Quick（QML）构建 Fluent 风格桌面应用',
 
       themeConfig: {
-        siteTitle: 'Rust Host 开发文档',
+        siteTitle: 'rinui-rs 开发文档',
         // 导航
         nav: [
           { text: '首页', link: '/zh/' },
@@ -211,9 +212,9 @@ export default defineConfig({
           { text: '控件', link: '/zh/components/' },
           { text: 'v0.1.0-alpha.1', items: [
             { text: '更新日志 (Releases)', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
-            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
+            { text: 'rinui-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: 'Rust Gallery', items: [
+          { text: 'rinui-rs Gallery', items: [
             { text: '从源码构建', link: '/zh/guide/getting-started' },
             { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
@@ -223,17 +224,17 @@ export default defineConfig({
         sidebar: {
           '/zh/guide/': [
             {
-              text: 'RinUI 简介',
+              text: '简介',
               items: [
                 { text: '什么是 rinui-rs？', link: '/zh/guide/' },
                 { text: '快速开始', link: '/zh/guide/getting-started' },
                 { text: '项目结构与资源', link: '/zh/guide/project-structure' },
-                { text: 'Rust Host 接入', link: '/zh/guide/rust-host' },
+                { text: '配置与 Rust/QML 交互', link: '/zh/guide/rust-host' },
                 { text: 'Runtime 与 Session', link: '/zh/guide/runtime-sessions' },
               ]
             },
             {
-              text: 'RinUI 核心',
+              text: '核心功能',
               collapsed: true,
               items: [
                 { text: '主题', link: '/zh/core/theme' },
@@ -375,9 +376,10 @@ export default defineConfig({
       label: "日本語",
       lang: "ja",
       title: 'rinui-rs ドキュメント',
+      description: 'rinui-rs、Rust、Qt Quick（QML）で Fluent スタイルのデスクトップアプリを構築',
 
       themeConfig: {
-        siteTitle: 'Rust Host ドキュメント',
+        siteTitle: 'rinui-rs ドキュメント',
         // 导航
         nav: [
           { text: 'ホーム', link: '/ja/' },
@@ -385,9 +387,9 @@ export default defineConfig({
           { text: 'コンポーネント', link: '/ja/components/' },
           { text: 'v0.1.0-alpha.1', items: [
             { text: 'リリースノート', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
-            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
+            { text: 'rinui-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: 'Rust Gallery', items: [
+          { text: 'rinui-rs Gallery', items: [
             { text: 'ソースからビルド', link: '/ja/guide/getting-started' },
             { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
@@ -397,17 +399,17 @@ export default defineConfig({
         sidebar: {
           '/ja/guide/': [
             {
-              text: 'RinUI 紹介',
+              text: '紹介',
               items: [
                 { text: 'rinui-rs とは？', link: '/ja/guide/' },
                 { text: 'はじめに', link: '/ja/guide/getting-started' },
                 { text: 'プロジェクト構成とリソース', link: '/ja/guide/project-structure' },
-                { text: 'Rust Host の統合', link: '/ja/guide/rust-host' },
+                { text: '設定と Rust/QML 連携', link: '/ja/guide/rust-host' },
                 { text: 'Runtime と Session', link: '/ja/guide/runtime-sessions' },
               ]
             },
             {
-              text: 'RinUI コア',
+              text: 'コア機能',
               collapsed: true,
               items: [
                 { text: 'テーマ', link: '/ja/core/theme' },
@@ -557,7 +559,7 @@ export default defineConfig({
     // 页脚
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Rust Host © ${currentYear} unDefFtr · Upstream RinUI, documentation and images © 2025 RinLit and contributors`
+      copyright: `rinui-rs © ${currentYear} unDefFtr · Upstream RinUI, documentation and images © 2025 RinLit and contributors`
     }
   }
 })
