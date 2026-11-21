@@ -125,6 +125,11 @@
   text-wrap: balance;
 }
 
+.VPHero .text,
+.VPHero .tagline {
+  white-space: pre-line;
+}
+
 .VPHero .image-src {
   width: 128px;
   height: 128px;

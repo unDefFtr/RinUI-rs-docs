@@ -18,27 +18,27 @@ const base = computed(() => `/assets/images/gallery-store${language.value === 'z
 const guideLink = computed(() => `${lang.value.startsWith('zh') ? '/zh' : lang.value.startsWith('ja') ? '/ja' : ''}/guide/getting-started`)
 const copy = computed(() => {
   if (lang.value.startsWith('zh')) return {
-    title: 'rinui-rs Gallery',
-    description: '运行 rinui-rs Gallery，通过交互式示例浏览 Fluent 风格 Qt Quick/QML 控件，查看组件说明、图标和源码入口。',
-    download: '从源码运行 rinui-rs Gallery',
+    title: 'RinUI-rs Gallery',
+    description: '运行 RinUI-rs Gallery，通过交互式示例浏览 Fluent 风格 Qt Quick/QML 控件，查看组件说明、图标和源码入口。',
+    download: '从源码运行 RinUI-rs Gallery',
     source: '截图来自上游 RinUI Gallery，展示共用的 QML 控件。',
     previous: '上一张截图',
     next: '下一张截图',
     slide: (n: number) => `第 ${n} 张，共 ${images.length} 张`
   }
   if (lang.value.startsWith('ja')) return {
-    title: 'rinui-rs Gallery',
-    description: 'rinui-rs Gallery を実行して、Fluent スタイルの Qt Quick/QML コントロールをインタラクティブなサンプルで確認できます。コンポーネントの説明、アイコン、ソースコードへのリンクも閲覧できます。',
-    download: 'rinui-rs Gallery をソースから実行',
+    title: 'RinUI-rs Gallery',
+    description: 'RinUI-rs Gallery を実行して、Fluent スタイルの Qt Quick/QML コントロールをインタラクティブなサンプルで確認できます。コンポーネントの説明、アイコン、ソースコードへのリンクも閲覧できます。',
+    download: 'RinUI-rs Gallery をソースから実行',
     source: '画像は共通 QML コントロールを紹介する上流 RinUI Gallery のものです。',
     previous: '前のスクリーンショット',
     next: '次のスクリーンショット',
     slide: (n: number) => `${images.length} 枚中 ${n} 枚目`
   }
   return {
-    title: 'rinui-rs Gallery',
-    description: 'Run rinui-rs Gallery to explore Fluent-style Qt Quick/QML controls with interactive examples, component guides, icons, and source links.',
-    download: 'Build rinui-rs Gallery',
+    title: 'RinUI-rs Gallery',
+    description: 'Run RinUI-rs Gallery to explore Fluent-style Qt Quick/QML controls with interactive examples, component guides, icons, and source links.',
+    download: 'Build RinUI-rs Gallery',
     source: 'Screenshots from upstream RinUI Gallery illustrate the shared QML controls.',
     previous: 'Previous screenshot',
     next: 'Next screenshot',

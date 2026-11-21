@@ -1,3 +1,3 @@
 # Introduction
 
-See [What is rinui-rs?](/guide/) and [Getting Started](/guide/getting-started).
+See [What is RinUI-rs?](/guide/) and [Getting Started](/guide/getting-started).

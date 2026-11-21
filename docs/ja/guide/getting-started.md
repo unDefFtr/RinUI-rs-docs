@@ -1,8 +1,8 @@
 # はじめに
 
-## rinui-rs Gallery を実行する
+## RinUI-rs Gallery を実行する
 
-rinui-rs Gallery を実行して、コントロールとインタラクティブなサンプルを確認できます。
+RinUI-rs Gallery を実行して、コントロールとインタラクティブなサンプルを確認できます。
 
 <GalleryCarousel section="guide" :show-copy="false" />
 
@@ -107,7 +107,7 @@ FluentWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("rinui-rs")
+    title: qsTr("RinUI-rs")
 
     Button {
         anchors.centerIn: parent

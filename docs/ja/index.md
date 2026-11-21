@@ -2,9 +2,13 @@
 layout: home
 
 hero:
-  name: "rinui-rs"
-  text: "Rust と QML で作る Fluent デスクトップアプリ"
-  tagline: "Rust と Qt Quick を組み合わせ、すぐに使えるコントロール、テーマ、ナビゲーションでデスクトップアプリを構築します。"
+  name: "Rust + Qt Quick"
+  text: |-
+    Rust と QML で
+    Fluent アプリを構築
+  tagline: |-
+    Rust と Qt Quick でアプリを構築。
+    コントロールとテーマ、ナビゲーションを標準装備。
   image:
     light:
       src: /assets/images/brand/rinui-vertical-light.png
@@ -53,9 +57,9 @@ features:
     linkText: コントロールを見る
 ---
 
-## rinui-rs を選ぶ理由
+## RinUI-rs を選ぶ理由
 
-rinui-rs は Rust デスクトップアプリ向けに Fluent スタイルのコントロール、テーマ、ナビゲーションを提供します。QML で UI を作り、Rust でアプリの起動、設定、プラットフォーム統合を管理します。
+RinUI-rs は Rust デスクトップアプリ向けに Fluent スタイルのコントロール、テーマ、ナビゲーションを提供します。QML で UI を作り、Rust でアプリの起動、設定、プラットフォーム統合を管理します。
 
 - **完成したウィンドウ構成**：`FluentWindow`、`NavigationView`、`FluentPage` をそのまま組み合わせられます。
 - **ネイティブなデスクトップ体験**：Windows で Mica、Acrylic、カスタムタイトルバー、標準ウィンドウ操作に対応します。
@@ -63,9 +67,9 @@ rinui-rs は Rust デスクトップアプリ向けに Fluent スタイルのコ
 
 <GalleryCarousel section="home" />
 
-## rinui-rs が向いているプロジェクト
+## RinUI-rs が向いているプロジェクト
 
-rinui-rs は、デスクトップウィンドウと充実したインタラクションが必要で、QML の開発速度も保ちたいプロジェクトに向いています。
+RinUI-rs は、デスクトップウィンドウと充実したインタラクションが必要で、QML の開発速度も保ちたいプロジェクトに向いています。
 
 - Rust と Qt Quick で構築するデスクトップツールやコンテンツ管理アプリ。
 - Fluent の視覚言語を取り入れつつ、ウィンドウ構成やコントロール状態を一から作らずに済ませたい社内アプリケーション。
@@ -135,6 +139,6 @@ fn main() -> ExitCode {
 
 ## 謝辞
 
-rinui-rs は [unDefFtr](https://github.com/unDefFtr/rinui-rs) が管理しています。QML コントロールと再利用した文書・画像は RinLit と上流 RinUI の貢献者によるものです。画像は上流 QML コンポーネントを紹介します。
+RinUI-rs は [unDefFtr](https://github.com/unDefFtr/rinui-rs) が管理しています。QML コントロールと再利用した文書・画像は RinLit と上流 RinUI の貢献者によるものです。画像は上流 QML コンポーネントを紹介します。
 
 [![コントリビューター](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)

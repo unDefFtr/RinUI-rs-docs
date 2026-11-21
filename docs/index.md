@@ -2,9 +2,13 @@
 layout: home
 
 hero:
-  name: "rinui-rs"
-  text: "Fluent desktop apps with Rust and QML"
-  tagline: "Build desktop apps with Rust and Qt Quick, with ready-to-use controls, themes, and navigation."
+  name: "Rust + Qt Quick"
+  text: |-
+    Fluent desktop apps
+    with Rust and QML
+  tagline: |-
+    Build desktop apps with Rust and Qt Quick.
+    Ready-to-use controls, themes, and navigation.
   image:
     light:
       src: /assets/images/brand/rinui-vertical-light.png
@@ -53,9 +57,9 @@ features:
     linkText: Browse controls
 ---
 
-## Why rinui-rs
+## Why RinUI-rs
 
-rinui-rs brings Fluent controls, themes, and navigation to Rust desktop applications. Build the interface in QML and manage application startup, configuration, and platform integration in Rust.
+RinUI-rs brings Fluent controls, themes, and navigation to Rust desktop applications. Build the interface in QML and manage application startup, configuration, and platform integration in Rust.
 
 - **A complete window structure**: `FluentWindow`, `NavigationView`, and `FluentPage` work together out of the box.
 - **Native desktop behavior**: Use Mica, Acrylic, custom title bars, and standard window controls on Windows.
@@ -63,15 +67,15 @@ rinui-rs brings Fluent controls, themes, and navigation to Rust desktop applicat
 
 <GalleryCarousel section="home" />
 
-## Where rinui-rs fits
+## Where RinUI-rs fits
 
-rinui-rs is intended for projects that need a desktop window and complete interactions while keeping the development speed of QML:
+RinUI-rs is intended for projects that need a desktop window and complete interactions while keeping the development speed of QML:
 
 - Desktop tools and content managers built with Rust and Qt Quick.
 - Internal applications that want a Fluent visual language without rebuilding the window shell and control states from scratch.
 - Prototypes or actively developed products that need navigation, settings pages, dialogs, tables, date selection, and theme switching.
 
-rinui-rs is not a replacement for a web component library, nor is it intended for projects that must remain entirely on Qt Widgets.
+RinUI-rs is not a replacement for a web component library, nor is it intended for projects that must remain entirely on Qt Widgets.
 
 ## Start with QML you already know
 
@@ -135,6 +139,6 @@ Continue with:
 
 ## Acknowledgments
 
-rinui-rs is maintained by [unDefFtr](https://github.com/unDefFtr/rinui-rs). QML controls, reused documentation and images: upstream RinUI by RinLit and contributors. Screenshots illustrate upstream QML components.
+RinUI-rs is maintained by [unDefFtr](https://github.com/unDefFtr/rinui-rs). QML controls, reused documentation and images: upstream RinUI by RinLit and contributors. Screenshots illustrate upstream QML components.
 
 [![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)

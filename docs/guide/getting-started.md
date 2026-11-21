@@ -1,8 +1,8 @@
 # Getting Started
 
-## Run the rinui-rs Gallery
+## Run the RinUI-rs Gallery
 
-Run rinui-rs Gallery to explore the controls and interactive examples.
+Run RinUI-rs Gallery to explore the controls and interactive examples.
 
 <GalleryCarousel section="guide" :show-copy="false" />
 
@@ -107,7 +107,7 @@ FluentWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("rinui-rs")
+    title: qsTr("RinUI-rs")
 
     Button {
         anchors.centerIn: parent

@@ -14,7 +14,7 @@ import RinUI
 Text {
     font.family: Utils.fontFamily
     font.pixelSize: 14
-    text: "rinui-rs"
+    text: "RinUI-rs"
 }
 ```
 
@@ -58,7 +58,7 @@ Text {
     width: 320
     height: 48
     font.pixelSize: 14
-    text: "rinui-rs"
+    text: "RinUI-rs"
 }
 ```
 
