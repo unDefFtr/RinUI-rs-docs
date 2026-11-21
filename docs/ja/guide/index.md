@@ -1,57 +1,30 @@
-<div align="center">
-  <VPImage
-    :image="{
-      light: '/assets/images/brand/rinui-logo-light.png',
-      dark: '/assets/images/brand/rinui-logo-dark.png',
-      alt: 'RinUI'
-    }"
-    width="240"
-  />
-</div>
+# rinui-rs とは？
 
-# RinUI とは？
+`rinui-rs` は Fluent スタイルの Qt Quick（QML）コンポーネントライブラリ [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI) に Rust / CXX-Qt 6 ネイティブホストを提供します。
 
-RinUI は **Qt Quick (QML)** アプリケーション向けの UI コンポーネントライブラリです。Fluent Design に着想を得たコントロール、テーマ機能、ユーティリティを提供し、統一感のある外観と分かりやすい操作性を備えたデスクトップアプリの開発を支援します。
-
-> [!TIP]
-> RinUI を試すには、[はじめに](getting-started)を参照してインストールし、サンプルを実行してください。
+アプリ UI は引き続き QML を使い、起動、設定、翻訳、エンジン設定、ネイティブ統合は Rust が担当します。独立アプリには `RinUIHost`、複数の利用側や既存 Qt GUI アプリには `RinUIRuntime` と Session を使います。
 
 ```qml
 import QtQuick
-import QtQuick.Controls
 import RinUI
 ```
 
-`RinUI` モジュールをインポートすれば、既存の Qt Quick プロジェクトで各コントロールを組み合わせて使用できます。Python アプリケーションでは PySide6 でアプリを起動し、QML を読み込みます。別の言語やフレームワークへ UI を書き換える必要はなく、アプリの画面は引き続き QML で構築できます。
+## 機能
 
-## RinUI が提供するもの
+- 入力、ナビゲーション、コレクション、ダイアログ、状態表示の QML コントロール。
+- ライト／ダーク／自動テーマ、アクセントカラー、Windows 背景効果。
+- 内蔵 RinUI QRC とファイルシステム開発モード。
+- Windows、macOS、Linux のプラットフォーム統合。
+- Rust/QML コンテキストプロパティ、QObject バックエンド、型付きルート連携、翻訳カタログ。
 
-- **一般的な UI コンポーネント**：ボタン、入力、ナビゲーション、ポップアップ、レイアウト、状態表示など。各コンポーネントのプロパティ、シグナル、使用例はドキュメントを参照してください。
-- **Fluent に着想を得たデザイン**：明確な階層、軽やかなサーフェス、一貫した操作性。
-- **テーマ機能**：ライト・ダークの外観設定。[テーマ](/ja/core/theme)で設定方法を確認できます。
-- **QML ワークフロー**：モジュールをインポートし、Qt Quick のレイアウト、バインディング、コンポーネント構成をそのまま活用できます。
+## 最初に読むページ
 
-## 適したプロジェクト
-
-Qt Quick / QML でデスクトップアプリを構築し、一般的な UI の重複実装を減らしたい場合や、Fluent に着想を得た一貫したデザインを採用したい場合に、RinUI を UI 開発の基盤として利用できます。RinUI が提供するのは UI コンポーネントと関連ユーティリティです。業務ロジック、データモデル、アプリケーション構成はアプリ側で管理します。
-
-## プロジェクトの状態
-
-RinUI は現在も開発が続いています。コンポーネント、API、テーマ機能はバージョン間で変更される可能性があります。インストール済みバージョンのドキュメントを参照し、リリースするアプリでは依存バージョンを固定して、アップグレード時に影響を確認してください。
-
-## 次に読むページ
-
-- 初めて使う場合：[はじめに](getting-started)でインストールしてサンプルを実行します。
-- QML ページとリソースの構成：[プロジェクト構成とリソース](/ja/guide/project-structure)を参照してください。
-- コントロールを探す場合：サイドバーからコンポーネントを選択し、使用方法と実行可能な例を確認してください。
-- 全体設定：[テーマ](/ja/core/theme)と[ユーティリティ](/ja/core/utils)を参照してください。
+- [はじめに](getting-started)：Gallery と最小 Rust アプリ。
+- [プロジェクト構成とリソース](project-structure)：import、リソースモード、QRC、配布。
+- [Rust Host の統合](rust-host)：設定、テーマ、翻訳、Rust/QML 連携。
+- [Runtime と Session](runtime-sessions)：共有／専用エンジンと既存 Qt アプリ。
+- [コンポーネント](/ja/components/)：QML プロパティ、シグナル、使用例。
 
 ## 謝辞
 
-RinUI の実装とデザインは、次のプロジェクトやリソースを参考にしています。
-
-- [Qt / Qt Quick](https://www.qt.io/)
-- [Fluent Design System](https://fluent2.microsoft.design/)
-- [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons/)
-
-[RinUI](https://github.com/RinLit-233-shiroko/Rin-UI) に貢献してくださる皆様に感謝します。
+QML コントロール、テーマ、再利用した文書・画像は RinLit と貢献者による [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI) に由来します。Rust ホストは [unDefFtr/rinui-rs](https://github.com/unDefFtr/rinui-rs) で管理しています。Qt Quick、CXX-Qt、Fluent Design、Fluent UI System Icons にも感謝します。MIT ライセンスと原著作者の帰属を維持します。

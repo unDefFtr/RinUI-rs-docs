@@ -9,19 +9,19 @@ defineProps<{
   showCopy?: boolean
 }>()
 
-const { lang, isDark } = useData()
+const { lang } = useData()
 const current = ref(0)
 const direction = ref(1)
 const images = ['Screenshot.png', 'Screenshot-1.png', 'Screenshot-2.png', 'Screenshot-3.png', 'Screenshot-4.png']
 const language = computed(() => lang.value.startsWith('zh') ? 'zh' : 'en')
-const base = computed(() => `/assets/images/gallery-store/${language.value === 'zh' ? '' : 'en'}`)
-const storeLocale = computed(() => lang.value.startsWith('zh') ? 'zh-cn' : lang.value.startsWith('ja') ? 'ja' : 'en-us')
+const base = computed(() => `/assets/images/gallery-store${language.value === 'zh' ? '' : '/en'}`)
+const guideLink = computed(() => `${lang.value.startsWith('zh') ? '/zh' : lang.value.startsWith('ja') ? '/ja' : ''}/guide/getting-started`)
 const copy = computed(() => {
   if (lang.value.startsWith('zh')) return {
     title: 'RinUI Gallery',
     description: '用交互式示例浏览 RinUI 的 Fluent 风格 Qt Quick/QML 控件，查看组件说明、图标和源码入口。',
-    download: '前往 GitHub Releases 下载',
-    store: '从 Microsoft Store 下载 RinUI Gallery',
+    download: '从源码运行 Rust Gallery',
+    source: '截图来自上游 RinUI Gallery，展示共用的 QML 控件。',
     previous: '上一张截图',
     next: '下一张截图',
     slide: (n: number) => `第 ${n} 张，共 ${images.length} 张`
@@ -29,8 +29,8 @@ const copy = computed(() => {
   if (lang.value.startsWith('ja')) return {
     title: 'RinUI Gallery',
     description: 'インタラクティブなサンプルで、RinUI の Fluent スタイル Qt Quick/QML コントロールを確認できます。コンポーネントの説明、アイコン、ソースコードへのリンクも閲覧できます。',
-    download: 'GitHub Releases からダウンロード',
-    store: 'Microsoft Store から RinUI Gallery をダウンロード',
+    download: 'Rust Gallery をソースから実行',
+    source: '画像は共通 QML コントロールを紹介する上流 RinUI Gallery のものです。',
     previous: '前のスクリーンショット',
     next: '次のスクリーンショット',
     slide: (n: number) => `${images.length} 枚中 ${n} 枚目`
@@ -38,8 +38,8 @@ const copy = computed(() => {
   return {
     title: 'RinUI Gallery',
     description: 'Explore RinUI’s Fluent style Qt Quick/QML controls with interactive examples, component guides, icons, and source links.',
-    download: 'Download from GitHub Releases',
-    store: 'Download RinUI Gallery from Microsoft Store',
+    download: 'Build the Rust Gallery',
+    source: 'Screenshots from upstream RinUI Gallery illustrate the shared QML controls.',
     previous: 'Previous screenshot',
     next: 'Next screenshot',
     slide: (n: number) => `Screenshot ${n} of ${images.length}`
@@ -81,12 +81,10 @@ onUnmounted(stop)
       <div class="gallery-carousel__dots" role="group" :aria-label="copy.title">
         <button v-for="(_, index) in images" :key="index" type="button" :class="{ active: current === index }" :aria-label="copy.slide(index + 1)" :aria-current="current === index ? 'true' : undefined" @click="goTo(index)" />
       </div>
-      <div class="gallery-carousel__actions">
-        <a class="gallery-carousel__store-badge" href="https://apps.microsoft.com/detail/9NJGH90NLXDM?referrer=appbadge&amp;mode=full" target="_blank" rel="noopener noreferrer" :aria-label="copy.store">
-          <img :src="`/assets/images/store-badges/${storeLocale}-${isDark ? 'light' : 'dark'}.svg`" width="200" :alt="copy.store">
-        </a>
-        <VPButton class="gallery-carousel__download" size="medium" theme="brand" :text="copy.download" href="https://github.com/RinLit-233-shiroko/Rin-UI/releases" target="_blank" rel="noreferrer" />
+      <div v-if="section === 'home'" class="gallery-carousel__actions">
+        <VPButton class="gallery-carousel__download" size="medium" theme="brand" :text="copy.download" :href="guideLink" />
       </div>
     </div>
+    <p class="gallery-carousel__source">{{ copy.source }}</p>
   </section>
 </template>

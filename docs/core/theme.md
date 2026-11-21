@@ -1,88 +1,42 @@
 # Theme
 
-## Introduction
+## Initialization
 
-RinUI provides a lightweight theme manager. 
+`Theme` is RinUI's QML singleton for appearance settings. `RinUIHost` initializes its backend before loading QML. For a custom engine, see [Runtime and Sessions](/guide/runtime-sessions).
 
-You only need to `import RinUI` in QML to get global theme support immediately. 
-The theme module exists as a singleton `pragma Singleton`, which keeps style switching consistent across the application.
-
-You can use the `Theme` manager like this: 
 ```qml
+import QtQuick
 import RinUI
 
-Component {
-    Component.onCompleted: {
-        Theme.function()
-    }
+Item {
+    Component.onCompleted: Theme.setTheme(Theme.mode.Auto)
 }
 ```
-```
 
-## Theme Modes
+## Modes and accent color {#modes-and-accent-color}
 
-### `setTheme(mode: Theme.mode)`
-The `setTheme` function is used to switch the light and dark theme of all RinUI components. This function accepts the following values:
+| API | Behavior |
+| --- | --- |
+| `Theme.setTheme(Theme.mode.Light / Dark / Auto)` | Select light, dark or system-following appearance. |
+| `Theme.toggleMode()` | Toggle effective light/dark appearance; does not cycle through Auto. |
+| `Theme.getTheme()` | Configured mode: `"Light"`, `"Dark"` or `"Auto"`. |
+| `Theme.currentTheme.isDark` / `Theme.isDark()` | Current effective appearance, including when Auto is selected. |
+| `Theme.setThemeColor(color)` | Set the accent with a hex string or QML color value. |
+| `Theme.getThemeColor()` | Current QML color; `"transparent"` before backend initialization. |
 
-- `Theme.mode.Light`: Switch to light theme
-- `Theme.mode.Dark`: Switch to dark theme
-- `Theme.mode.Auto`: Auto switch theme, based on the current system theme mode to decide whether to switch to light or dark theme
+`HostConfig.config_location` controls how theme settings are stored. For storage configuration and Rust calls, see [Rust Host integration](/guide/rust-host).
 
-### `toggleMode()`
-`toggleMode` switches between `Theme.mode.Light` and `Theme.mode.Dark` based on the effective appearance. A dark interface becomes light, and a light interface becomes dark:
+## Windows backdrop effects
 
-```qml
-Theme.toggleMode()
-```
-```
+Use `Theme.setBackdropEffect(Theme.effect.Mica / Acrylic / Tabbed / None)` after a window is loaded. `Theme.getBackdropEffect()` returns `"mica"`, `"acrylic"`, `"tabbed"` or `"none"`.
 
-It does not cycle through the `Light`, `Dark`, and `Auto` configuration modes. Call `setTheme()` directly to enter or leave automatic mode.
+| Effect | Platform support |
+| --- | --- |
+| Mica | Windows 11. |
+| Acrylic | Windows 10; requests on Windows 11 21H2 fall back to Mica. |
+| Tabbed | Windows 11 22H2+; requests on Windows 11 21H2 fall back to Mica. |
+| None | Disables Windows background material. Other platforms use their normal background. |
 
-### `getTheme() -> str`
-The `getTheme` function returns the stored theme configuration mode:
+For Rust backdrop calls and return codes, see [Rust Host integration](/guide/rust-host#windows-backdrops-and-window-configuration).
 
-- `"Light"`: The current theme is light
-- `"Dark"`: The current theme is dark
-- `"Auto"`: The current theme is auto mode
-
-In `Auto` mode, `getTheme()` still returns `"Auto"` rather than resolving to the effective light or dark appearance. Read the effective appearance separately:
-
-```qml
-let darkNow = Theme.currentTheme.isDark
-```
-```
-
-You can also call `Theme.isDark()`, which returns `currentTheme.isDark`.
-
-### `setThemeColor(color)`
-`setThemeColor` sets the RinUI accent color. It accepts a hexadecimal string or a QML `color` value, for example `"#FF0000"` for red.
-
-### `getThemeColor() -> color`
-`getThemeColor` returns the current accent color as a QML `color` value. It returns `"transparent"` when the theme manager is not initialized.
-
-## Background Effects
-
-> [!NOTE]
-> The settings for background effects are only valid on Windows and some effects require Windows 11 and above versions.
->
-> | Effect       | Supported System Versions       |
-> |----------|---------------|
-> | Mica     | > Windows 11  |
-> | Acrylic  | >= Windows 10 |
-> | Tabbed   | > Windows 11  |
-
-### `setBackdropEffect(effect: Theme.effect)`
-The `setBackdropEffect` function is used to set the background effect of RinUI components. This function accepts the following values:
-
-- `Theme.effect.Mica`: Mica background effect
-- `Theme.effect.Acrylic`: Acrylic background effect
-- `Theme.effect.Tabbed`: Tabbed background (Mica Alt) effect
-- `Theme.effect.None`: No background effect
-
-### `getBackdropEffect() -> str`
-The `getBackdropEffect` function is used to get the current background effect of the component. The function will return the following values:
-
-- `"mica"`: Mica background effect
-- `"acrylic"`: Acrylic background effect
-- `"tabbed"`: Tabbed background (Mica Alt) effect
-- `"none"`: No background effect
+See [FluentWindow](/Windowing/FluentWindow) and [Project Structure and Resources](/guide/project-structure).

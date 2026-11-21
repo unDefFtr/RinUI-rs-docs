@@ -47,27 +47,16 @@ FluentWindow {
 
 示例中的首页使用 Gallery 的 `SamplePage.qml`，导航窗口启动后会直接展示该页面。
 
-## Python 启动
+## Rust 启动
 
-`QApplication` 必须先于 `RinUIWindow` 创建：
+通过 `RinUIHost` 在 GUI 主线程加载此 QML。完整 Rust 入口和 Cargo 依赖见[快速开始](/zh/guide/getting-started)。加载后使用返回的根 ID 配置对应窗口：
 
-```python
-import sys
-
-from PySide6.QtWidgets import QApplication
-from RinUI import BackdropEffect, RinUIWindow, Theme
-
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-
-window.setIcon("assets/app-icon.png")
-window.setTheme(Theme.Auto)
-window.setBackdropEffect(BackdropEffect.Mica)
-
-sys.exit(app.exec())
+```rust
+let loaded = host.load(&QmlSource::File(qml))?;
+host.set_icon(":/app/assets/app-icon.png", Some(loaded.root_id));
 ```
 
-`setBackdropEffect()` 的背景效果只适用于 Windows。在非 Windows 平台请使用 `BackdropEffect.None_`，否则会抛出 `OSError`。
+此片段沿用快速开始中的 `host`、`qml` 和 `QmlSource` 导入。示例路径要求图标已经加入应用自己的 QRC。主题与背景效果设置见[主题系统](/zh/core/theme)。
 
 ## 主要属性
 
@@ -108,7 +97,7 @@ FluentWindow {
 
 ## 窗口外观
 
-RinUI 的窗口背景、圆角、边框和主题变化由 `FluentWindowBase` 统一处理。Windows 上可以结合 Mica、Acrylic、Tabbed 或 None 背景；macOS 使用原生交通灯按钮；其他系统回退到普通窗口背景。
+RinUI 的窗口背景、圆角、边框和主题变化由 `FluentWindowBase` 统一处理。Windows 上可以结合 Mica、Acrylic、Tabbed 或 None 背景；macOS 在 Rust 宿主中默认使用 QML 自绘标题栏控件，也可显式启用原生窗口框架；其他系统回退到普通窗口背景。
 
 更多主题调用参见[主题系统](/zh/core/theme)。
 

@@ -1,89 +1,42 @@
-# テーマ
+# テーマ（`Theme`）
 
-## 概要
+## 初期化
 
-RinUI は軽量なテーママネージャーを提供します。
+`Theme` は外観を管理する RinUI の QML シングルトンです。`RinUIHost` は QML 読み込み前にバックエンドを初期化します。独自エンジンの接続方法は [Runtime と Session](/ja/guide/runtime-sessions)を参照してください。
 
-QML で `import RinUI` をするだけで、すぐにグローバルなテーマサポートが得られます。
-テーマモジュールはシングルトン `pragma Singleton` として存在し、アプリケーション全体のスタイル切り替えを一貫して管理します。
-
-このように `Theme` マネージャーを使用できます：
 ```qml
+import QtQuick
 import RinUI
 
-Component {
-    Component.onCompleted: {
-        Theme.function()
-    }
+Item {
+    Component.onCompleted: Theme.setTheme(Theme.mode.Auto)
 }
 ```
-```
 
-## テーマモード
+## モードとアクセント {#modes-and-accent-color}
 
-### `setTheme(mode: Theme.mode)`
-`setTheme` 関数は、すべての RinUI コンポーネントのライトテーマとダークテーマを切り替えるために使用されます。この関数は以下の値を受け付けます：
+| API | 動作 |
+| --- | --- |
+| `Theme.setTheme(Theme.mode.Light / Dark / Auto)` | ライト、ダーク、システム追従を選択。 |
+| `Theme.toggleMode()` | 実際の表示をライト／ダークで切り替え。Auto を含む循環ではありません。 |
+| `Theme.getTheme()` | 設定モード：`"Light"`、`"Dark"`、`"Auto"`。 |
+| `Theme.currentTheme.isDark` / `Theme.isDark()` | Auto も含めた実際の表示。 |
+| `Theme.setThemeColor(color)` | 16 進文字列または QML color でアクセントを設定。 |
+| `Theme.getThemeColor()` | 現在の QML color。初期化前は `"transparent"`。 |
 
-- `Theme.mode.Light`: ライトテーマに切り替え
-- `Theme.mode.Dark`: ダークテーマに切り替え
-- `Theme.mode.Auto`: テーマを自動切り替え。現在のシステムテーマモードに基づいてライトテーマまたはダークテーマに切り替えるかどうかを決定します。
+`HostConfig.config_location` でテーマ設定の保存方法を指定します。保存設定と Rust からの呼び出しは [Rust Host の統合](/ja/guide/rust-host)を参照してください。
 
-### `toggleMode()`
-`toggleMode` は現在の実際の外観に基づき、`Theme.mode.Light` と `Theme.mode.Dark` を切り替えます。ダーク表示ならライトへ、ライト表示ならダークへ切り替わります：
+## Windows の背景効果
 
-```qml
-Theme.toggleMode()
-```
-```
+ウィンドウの読み込み後に `Theme.setBackdropEffect(Theme.effect.Mica / Acrylic / Tabbed / None)` を使います。`Theme.getBackdropEffect()` は `"mica"`、`"acrylic"`、`"tabbed"`、`"none"` を返します。
 
-`Light`、`Dark`、`Auto` の設定モードを順番に切り替える関数ではありません。自動モードへ入る、または自動モードから抜ける場合は `setTheme()` を直接呼び出してください。
+| 効果 | 対応プラットフォーム |
+| --- | --- |
+| Mica | Windows 11。 |
+| Acrylic | Windows 10。Windows 11 21H2 では Mica にフォールバック。 |
+| Tabbed | Windows 11 22H2 以降。Windows 11 21H2 では Mica にフォールバック。 |
+| None | Windows の背景材質を無効化。他の OS は通常の背景を使用。 |
 
-### `getTheme() -> str`
-`getTheme` 関数は、保存されているテーマ設定モードを返します：
+Rust からの背景効果の設定と戻り値は [Rust Host の統合](/ja/guide/rust-host)を参照してください。
 
-- `"Light"`: 現在のテーマはライトです
-- `"Dark"`: 現在のテーマはダークです
-- `"Auto"`: 現在のテーマは自動モードです
-
-`Auto` モードでも `getTheme()` は `"Auto"` を返し、実際に適用されているライト／ダークへ解決しません。実際の外観は別途取得します：
-
-```qml
-let darkNow = Theme.currentTheme.isDark
-```
-```
-
-`Theme.isDark()` を呼び出すこともできます。これは `currentTheme.isDark` を返します。
-
-### `setThemeColor(color)`
-`setThemeColor` は RinUI のアクセントカラーを設定します。16 進数の文字列または QML の `color` 値を受け付けます（例：`"#FF0000"` は赤）。
-
-### `getThemeColor() -> color`
-`getThemeColor` は現在のアクセントカラーを QML の `color` 値として返します。テーママネージャーが初期化されていない場合は `"transparent"` を返します。
-
-## 背景エフェクト
-
-> [!NOTE]
-> 背景エフェクトの設定は Windows でのみ有効であり、一部のエフェクトは Windows 11 以降のバージョンが必要です。
->
-> | エフェクト   | サポートされるシステムバージョン |
-> |----------|-------------------|
-> | Mica     | > Windows 11      |
-> | Acrylic  | >= Windows 10     |
-> | Tabbed   | > Windows 11      |
-
-### `setBackdropEffect(effect: Theme.effect)`
-`setBackdropEffect` 関数は、RinUI コンポーネントの背景エフェクトを設定するために使用されます。この関数は以下の値を受け付けます：
-
-- `Theme.effect.Mica`: Mica 背景エフェクト
-- `Theme.effect.Acrylic`: Acrylic 背景エフェクト
-- `Theme.effect.Tabbed`: Tabbed 背景 (Mica Alt) エフェクト
-- `Theme.effect.None`: 背景エフェクトなし
-
-### `getBackdropEffect() -> str`
-`getBackdropEffect` 関数は、コンポーネントの現在の背景エフェクトを取得するために使用されます。関数は以下の値を返します：
-
-- `"mica"`: Mica 背景エフェクト
-- `"acrylic"`: Acrylic 背景エフェクト
-- `"tabbed"`: Tabbed 背景 (Mica Alt) エフェクト
-- `"none"`: 背景エフェクトなし
-```
+[FluentWindow](/ja/Windowing/FluentWindow)、[プロジェクト構成とリソース](/ja/guide/project-structure)も参照してください。

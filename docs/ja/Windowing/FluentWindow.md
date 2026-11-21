@@ -44,27 +44,16 @@ FluentWindow {
 
 `defaultPage` が空の場合、`NavigationView` は `navigationItems` の最初の項目を読み込みます。開始ページを固定する場合は `defaultPage` を明示します。
 
-## Python からの起動
+## Rust からの起動
 
-`RinUIWindow` を作成する前に `QApplication` が必要です：
+GUI メインスレッドで `RinUIHost` から QML を読み込みます。完全な Rust 起動処理と Cargo 依存関係は[はじめに](/ja/guide/getting-started)を参照してください。読み込み後、返されたルート ID でウィンドウを設定できます。
 
-```python
-import sys
-
-from PySide6.QtWidgets import QApplication
-from RinUI import BackdropEffect, RinUIWindow, Theme
-
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-
-window.setIcon("assets/app-icon.png")
-window.setTheme(Theme.Auto)
-window.setBackdropEffect(BackdropEffect.Mica)
-
-sys.exit(app.exec())
+```rust
+let loaded = host.load(&QmlSource::File(qml))?;
+host.set_icon(":/app/assets/app-icon.png", Some(loaded.root_id));
 ```
 
-背景効果は Windows 専用です。その他のプラットフォームでは `BackdropEffect.None_` を使用してください。それ以外の値を指定すると `OSError` になります。
+この断片は「はじめに」の `host`、`qml`、`QmlSource` import を使います。アイコンはアプリ自身の QRC に登録してください。テーマと背景効果の設定は[テーマシステム](/ja/core/theme)を参照してください。
 
 ## 主なプロパティ
 
@@ -97,13 +86,12 @@ FluentWindow {
     }
 }
 ```
-```
 
 `titleBarArea` はタイトルバー中央に配置されます。先頭のアイコン、戻るボタン、ウィンドウボタンはナビゲーションバーと `FluentWindowBase` が管理します。
 
 ## ウィンドウの外観
 
-背景、角丸、枠線、テーマ変更は `FluentWindowBase` が処理します。Windows では Mica、Acrylic、Tabbed、背景なしを選択できます。macOS ではネイティブのトラフィックライトを使用し、その他のシステムでは通常のウィンドウ背景にフォールバックします。
+背景、角丸、枠線、テーマ変更は `FluentWindowBase` が処理します。Windows では Mica、Acrylic、Tabbed、背景なしを選択できます。macOS の Rust ホストは既定で QML タイトルバーを使用し、ネイティブフレームも選択でき、その他のシステムでは通常のウィンドウ背景にフォールバックします。
 
 テーマについては[テーマシステム](/ja/core/theme)を参照してください。
 

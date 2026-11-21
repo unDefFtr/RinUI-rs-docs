@@ -1,75 +1,110 @@
 # プロジェクト構成とリソース
 
-このガイドでは、QML のインポート方法、アプリケーションのディレクトリ構成、リソースパスでよくある問題を説明します。RinUI は Qt Quick のコンポーネントライブラリです。QML からモジュールをインポートし、Python 側では PySide6 を使って Qt アプリケーションを起動します。
-
-## RinUI のインポート
-
-RinUI コントロールを使用する QML ファイルの先頭でモジュールをインポートします。
-
-```qml
-import QtQuick
-import QtQuick.Controls
-import RinUI
-```
-```
-
-Python パッケージをインストールした環境では、通常 QML から `import RinUI` を使用できます。イベントループが終了するまで、アプリケーションとウィンドウのオブジェクトを保持してください。
-
-```python
-import sys
-from PySide6.QtWidgets import QApplication
-from RinUI import RinUIWindow
-
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-sys.exit(app.exec())
-```
-
-インストール済みパッケージではなくソースツリーから実行する場合は、リポジトリの Gallery やサンプルの起動方法に従ってください。任意の作業ディレクトリからローカルの `RinUI` モジュールを解決できるとは限りません。
-
-## 推奨するアプリ構成
-
-Python の起動コード、QML ページ、静的リソースを役割ごとに分けます。
+Rust の起動処理とビジネスロジックは `src/`、ページと画像は `qml/` に置きます。RinUI コントロールは QML の `import RinUI` で利用します。出発点となる完全なアプリは[はじめに](getting-started)を参照してください。
 
 ```text
-my-app/
-├── main.py
-├── main.qml
-├── pages/
-│   └── HomePage.qml
-└── assets/
-    ├── images/
-    └── fonts/
+projects/
+├── rinui-rs/
+└── rinui-starter/
+    ├── Cargo.toml
+    ├── build.rs              # optional: application QRC / CXX-Qt backend
+    ├── resources.qrc         # optional: application resources
+    ├── src/
+    │   ├── main.rs
+    │   └── backend.rs        # optional: application QObject
+    └── qml/
+        ├── main.qml
+        ├── pages/Home.qml
+        └── assets/images/logo.png
 ```
 
-アプリ固有のページや画像はアプリのプロジェクト内に配置します。RinUI のコントロールは `import RinUI` で使用できるため、各ページへコンポーネントのソースをコピーする必要はありません。
+## リソースモード {#resource-modes}
 
-## リソースパス
+`HostConfig::default()` は `ResourceMode::Auto` を使用します。空でない `RINUI_DEV_PATH` があればそのパスを選び、それ以外は内蔵リソースを使います。無効な環境変数パスはエラーになり、暗黙にはフォールバックしません。
 
-QML の相対 URL は通常、その URL を宣言した QML ファイルを基準に解決されます。プロジェクト内のリソースには相対パスまたは Qt リソース URL を使用し、パッケージ設定にも対象ファイルを含めてください。
+| モード | RinUI リソースの場所 |
+| --- | --- |
+| `Embedded` | コンパイル済み QRC。インポート接頭辞は `qrc:/rinui`、アセットは `:/rinui/RinUI`。 |
+| `Filesystem(path)` | `RinUI/qmldir` を含む checkout。`RinUI/` ディレクトリ自体も指定可能。 |
+| `Auto` | 空でない `RINUI_DEV_PATH`、それ以外は `Embedded`。 |
 
-```qml
-Image {
-    source: "assets/images/logo.png"
+ファイルシステムモードは起動時にリソースを読み込み、自動監視やホットリロードは行いません。UI の使用中はホスト／Session を保持してください。
+
+**ビルド時：** `RINUI_UPSTREAM_DIR` は内蔵する上流ソースの場所を変更します。上流 checkout またはその `RinUI/` ディレクトリを指定できます。ネイティブソースには完全な `rinui-rs` checkout が必要です。
+
+**実行時：** `RINUI_DEV_PATH` は `Auto` の選択に影響します。`Embedded` にコンパイル済みの内容は変更しません。配布には `Embedded` を明示することを推奨します。
+
+**Gallery：** ルートから `cargo run -p rinui-gallery -- --dev /absolute/path/to/Rin-UI` でファイルシステムを選択します。`examples/gallery.qml` も必要です。RinUI だけのディレクトリなら `--examples-dir /absolute/path/to/examples` または `RINUI_EXAMPLES_DIR` を指定します。これらは Gallery 専用引数です。
+
+## アプリのファイルと QRC
+
+RinUI 内蔵リソースにアプリ自身の QML、画像、翻訳は**自動では含まれません**。開発中は絶対パスと `QmlSource::File` を使います。QML の相対 URL は宣言元ファイルを基準に解決されます。例えば `qml/main.qml` では `source: "assets/images/logo.png"` と書けます。
+
+配布用のアプリリソースは別途同梱します。最小アプリに以下の設定とファイルを追加してください。この例は `main.qml` だけを内蔵します。参照するページ、画像、翻訳も相対パスを保つエイリアスで追加します。
+
+既存の `[dependencies]` に次の依存関係を追加し、新しいビルド依存関係の節を作ります：
+
+```toml [Cargo.toml]
+cxx-qt = "0.10.0"
+
+[build-dependencies]
+cxx-qt-build = "0.10.0"
+```
+
+```xml [resources.qrc]
+<RCC>
+    <qresource prefix="/app">
+        <file alias="main.qml">qml/main.qml</file>
+    </qresource>
+</RCC>
+```
+
+```rust [build.rs]
+fn main() {
+    println!("cargo::rerun-if-changed=resources.qrc");
+    println!("cargo::rerun-if-changed=qml/main.qml");
+    cxx_qt_build::CxxQtBuilder::new()
+        .qrc("resources.qrc")
+        .build();
 }
 ```
+
+`run()` でホスト作成前にアプリリソースを登録し、ファイル読み込みを QRC URL に置き換えます：
+
+```rust
+cxx_qt::init_crate!(rinui_starter);
+// ... create host ...
+host.load(&QmlSource::Url("qrc:/app/main.qml".to_owned()))?;
 ```
 
-サブディレクトリ内のページでは、そのページの場所からの相対パスを指定します。安定して配布するリソースは Qt リソースコレクションに含め、起動時の作業ディレクトリに依存しない `qrc:/...` URL で参照できます。
+不要になった `PathBuf` の import を削除し、`cargo run` を実行します。ホストは自身の RinUI リソースを初期化し、上記 `init_crate!` はアプリのリソースを初期化します。`QmlSource::Url` には `qrc:/app/main.qml`、Qt のファイル名 API には `:/app/...` を使います。
 
-## QML モジュールとコンポーネント
+予約済みの `qrc:/rinui` 名前空間は避けてください。独自 QML モジュールのディレクトリは読み込み前に `host.add_import_path(...)` または `configure_engine(...)` で登録します。
 
-ページは独立した `.qml` ファイルに分け、親ページで組み合わせます。アプリ固有のページと再利用可能なコンポーネントを分離してください。コンポーネント名とプロパティはドキュメントおよびインストール済みバージョンのソースを確認します。API は開発中に変更される場合があります。
+## パッケージ化
 
-インポートの問題を調査するときは、次の点を確認してください。
+`cargo build --release -p rinui-gallery` で Gallery をビルドします。`rinui-rs` のルートから実行する以下のスクリプトを配布の参考にできます：
 
-1. 使用中の Python インタープリターに RinUI と依存関係がインストールされている。
-2. QML に大文字小文字を正しく指定した `import RinUI` がある。
-3. 起動コードが想定した QML ファイルを読み込んでいる。
-4. 独自 QML モジュールのディレクトリと `qmldir` がインポートパスに含まれている。
+```bash [macOS / Linux]
+bash scripts/package_macos.sh
+bash scripts/package_linux.sh
+```
 
-## HiDPI のサイズ指定
+```powershell [Windows]
+.\scripts\package_windows.ps1
+# MSIX: see packaging/windows/README.md and scripts/package_msix.ps1
+```
 
-Qt Quick の `width`、`height`、`font.pixelSize` は論理ピクセル単位です。設計上のサイズをそのまま使用してください。デバイスピクセル比をさらに掛けると二重に拡大されます。ウィンドウを異なるサイズに対応させるには、物理ピクセルに直接結び付けるのではなく、アンカー、レイアウト、適切な最小・最大サイズを利用します。
+これらは Gallery 用で、Qt ライブラリ、プラグイン、QML ランタイムモジュール、ライセンスを同梱します。独自アプリではバイナリとリソースに合わせて調整してください。QRC を内蔵しても Qt の動的ライブラリは必要です。開発 checkout や開発用 Qt パスに依存しない環境で確認してください。
 
-グローバルテーマや補助 API については、[テーマ](/ja/core/theme) と [ユーティリティ](/ja/core/utils) を参照してください。
+## トラブルシューティングと HiDPI
+
+- ビルド時に上流リソースがない：サブモジュールと `RINUI_UPSTREAM_DIR` を確認します。
+- `module "RinUI" is not installed`：`host.import_paths()`、リソースモード、`RINUI_DEV_PATH` を確認します。
+- QML 読み込み失敗：`HostError::QmlLoadFailed` と `host.qml_warnings()` でファイル、import、リソースのエイリアスを調べます。
+- Qt プラットフォームプラグインや Qt5Compat がない：Qt プラグインと QML モジュールを配布物に含めます。
+- Qt Quick の寸法と `font.pixelSize` は論理ピクセルです。`Utils.dpiScale` を掛けないでください。`Utils.dp()` は非推奨の恒等関数です。
+
+[テーマ](/ja/core/theme)、[ユーティリティ](/ja/core/utils)、[Rust Host の統合](rust-host)も参照してください。
+
+[rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)

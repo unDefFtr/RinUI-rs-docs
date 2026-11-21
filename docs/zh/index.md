@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "Qt Quick + PySide"
-  text: "面向桌面应用的 Fluent 风格开源 UI 库"
-  tagline: "为桌面应用提供窗口、导航、主题和常用控件，保留熟悉的 QML 开发方式。"
+  name: "Rust + Qt Quick"
+  text: "以 Rust 原生宿主运行 Fluent QML 控件"
+  tagline: "使用 Rust / CXX-Qt 6 与 RinUI QML 构建桌面应用，保留熟悉的窗口、导航与主题系统。"
   image:
     light:
       src: /assets/images/brand/rinui-vertical-light.png
@@ -55,11 +55,11 @@ features:
 
 ## 为什么选择 RinUI
 
-RinUI 为 Qt Quick 桌面应用提供一套可复用的界面基础，统一窗口、导航、页面、主题和常用控件的使用方式。
+`rinui-rs` 为上游 RinUI 控件提供可复用的 Rust / CXX-Qt 6 原生宿主。界面仍使用 QML，Rust 负责启动、配置与平台集成。
 
 - **完整的窗口结构**：`FluentWindow`、`NavigationView` 与 `FluentPage` 开箱即可组合使用。
 - **原生桌面体验**：Windows 支持 Mica、Acrylic、自定义标题栏和标准窗口控制。
-- **统一的设计系统**：主题、控件、图标、多语言资源与 Python 启动入口共享一致 API。
+- **统一的设计系统**：Rust 承载 QML 控件、主题、图标与翻译资源。
 
 <GalleryCarousel section="home" />
 
@@ -67,7 +67,7 @@ RinUI 为 Qt Quick 桌面应用提供一套可复用的界面基础，统一窗�
 
 RinUI 更适合需要桌面窗口和完整交互、又希望保留 QML 开发效率的项目：
 
-- 使用 PySide6 与 Qt Quick 构建的桌面工具和内容管理器。
+- 使用 Rust 与 Qt Quick 构建的桌面工具和内容管理器。
 - 希望采用 Fluent 视觉语言，但不想从零编写窗口框架与控件状态的内部应用。
 - 需要导航、设置页、对话框、表格、日期选择和主题切换等常用能力的原型或持续迭代项目。
 
@@ -85,6 +85,7 @@ import QtQuick
 import RinUI
 
 FluentWindow {
+    visible: true
     width: 960
     height: 640
 
@@ -98,17 +99,32 @@ FluentWindow {
 }
 ```
 
-在 Python 侧创建应用窗口：
+从 Rust 加载 QML，完整 Cargo 配置见[快速开始](/zh/guide/getting-started)：
 
-```python
-import sys
+```rust
+use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};
+use std::{path::PathBuf, process::ExitCode};
 
-from PySide6.QtWidgets import QApplication
-from RinUI import RinUIWindow
+fn run() -> Result<i32, Box<dyn std::error::Error>> {
+    let mut host = RinUIHost::new(HostConfig {
+        identity: AppIdentity::new("RinUIDocs", "Starter"),
+        resource_mode: ResourceMode::Embedded,
+        ..HostConfig::default()
+    })?;
+    let qml = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("qml/main.qml");
+    host.load(&QmlSource::File(qml))?;
+    Ok(host.exec())
+}
 
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-sys.exit(app.exec())
+fn main() -> ExitCode {
+    match run() {
+        Ok(code) => ExitCode::from((code & 0xff) as u8),
+        Err(error) => {
+            eprintln!("error: {error}");
+            ExitCode::FAILURE
+        }
+    }
+}
 ```
 
 进一步阅读：
@@ -118,10 +134,8 @@ sys.exit(app.exec())
 - [NavigationView 导航容器](/zh/Navigation/NavigationView)
 - [主题系统与窗口背景](/zh/core/theme)
 
-::: info 项目状态
-RinUI 仍在持续开发中。接口和视觉细节可能继续调整，建议先用于原型、内部工具和可接受迭代成本的项目，并在升级前阅读版本变更。
-:::
-
 ## 致谢
+
+Rust 宿主来自 [unDefFtr/rinui-rs](https://github.com/unDefFtr/rinui-rs)。QML 控件及沿用的文档、图片来自 RinLit 与上游 RinUI 贡献者；截图用于展示上游 QML 组件。
 
 [![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)

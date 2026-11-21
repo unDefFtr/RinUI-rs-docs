@@ -1,57 +1,30 @@
-<div align="center">
-  <VPImage
-    :image="{
-      light: '/assets/images/brand/rinui-logo-light.png',
-      dark: '/assets/images/brand/rinui-logo-dark.png',
-      alt: 'RinUI'
-    }"
-    width="240"
-  />
-</div>
+# What is rinui-rs?
 
-# What is RinUI?
+`rinui-rs` is a native Rust / CXX-Qt 6 host for [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI), a Fluent-style Qt Quick (QML) component library.
 
-RinUI is a UI component library for **Qt Quick (QML)** applications. Inspired by Fluent Design, it provides controls, theming, and utilities that help developers build desktop applications with a consistent appearance and clear interactions.
-
-> [!TIP]
-> To try RinUI, follow [Getting Started](getting-started) to install it and run the examples.
+Application UI remains QML. Rust owns startup, configuration, translations, engine setup and native platform integration. Use `RinUIHost` for a standalone app, or `RinUIRuntime` with sessions when integrating multiple consumers or an existing Qt GUI application.
 
 ```qml
 import QtQuick
-import QtQuick.Controls
 import RinUI
 ```
 
-Import the `RinUI` module to compose its controls in an existing Qt Quick project. Python applications can use PySide6 to start the app and load QML. RinUI does not require rewriting the UI in another language or framework; application pages remain QML.
+## Capabilities
 
-## What RinUI Provides
+- Familiar QML controls: input, navigation, collections, dialogs and status information.
+- Light, dark and automatic theme modes, accent colors and Windows backdrop integration.
+- Embedded RinUI QRC resources or filesystem development resources.
+- Windows, macOS and Linux platform integration.
+- Rust/QML context properties, QObject backends, typed root-object interaction and translation catalogs.
 
-- **Common UI components**: buttons, input controls, navigation, popups, layouts, and status information. Browse the component documentation for properties, signals, and examples.
-- **Fluent-inspired design**: clear hierarchy, lightweight surfaces, and consistent interaction details.
-- **Theming**: light and dark appearance settings. See [Theme](/core/theme) for configuration.
-- **QML workflow**: import the module and continue using Qt Quick layouts, bindings, and composition.
+## Start here
 
-## Suitable Projects
-
-RinUI is a foundation for desktop applications built with Qt Quick or QML when you want to reduce repetitive UI work or adopt a consistent Fluent-inspired visual language. It focuses on UI components and related utilities; business logic, data models, and application architecture remain the responsibility of the application.
-
-## Project Status
-
-RinUI is under active development. Component coverage, APIs, and theming may change between releases. Refer to the documentation for the version you have installed, pin dependency versions for release projects, and review affected controls when upgrading.
-
-## Where to Start
-
-- New users: follow [Getting Started](getting-started) to install RinUI and run an example.
-- Organizing QML pages and assets: read [Project Structure and Resources](/guide/project-structure).
-- Finding a control: choose a component from the sidebar to view its usage and runnable examples.
-- Global configuration: see [Theme](/core/theme) and [Utils](/core/utils).
+- [Getting Started](getting-started): build the Gallery and a minimal Rust application.
+- [Project Structure and Resources](project-structure): imports, resource modes, QRC and packaging.
+- [Rust Host integration](rust-host): configuration, theme, translation and Rust/QML interaction.
+- [Runtime and Sessions](runtime-sessions): shared/private engines and existing Qt applications.
+- [Components](/components/): QML properties, signals and usage examples.
 
 ## Acknowledgments
 
-RinUI's implementation and design draw on these projects and resources:
-
-- [Qt / Qt Quick](https://www.qt.io/)
-- [Fluent Design System](https://fluent2.microsoft.design/)
-- [Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons/)
-
-Thanks to everyone who contributes to [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI).
+The QML controls, themes and reused documentation/images come from [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI) by RinLit and contributors. The Rust host is maintained in [unDefFtr/rinui-rs](https://github.com/unDefFtr/rinui-rs). Thanks also to Qt Quick, CXX-Qt, Fluent Design and Fluent UI System Icons. Original attribution is retained under the MIT License.

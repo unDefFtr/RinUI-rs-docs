@@ -4,8 +4,8 @@ const currentYear = new Date().getFullYear()
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "RinUI Documentation",
-  description: "RinUI development documentation - A Fluent Design-like UI library for Qt Quick (QML)",
+  title: "rinui-rs Documentation",
+  description: "rinui-rs Rust Host and RinUI Qt Quick (QML) component documentation",
   head: [
       ['link', { rel: 'icon', href: '/assets/images/brand/rinui-mark-light.png' }]  // 添加网站图标
   ],
@@ -26,22 +26,22 @@ export default defineConfig({
     root: {
       label: "English",
       lang: "en",
-      title: "RinUI Documentation",
+      title: "rinui-rs Documentation",
 
       themeConfig: {
-        siteTitle: 'Documentation',
+        siteTitle: 'Rust Host Documentation',
         // 导航
         nav: [
           { text: 'Home', link: '/' },
           { text: 'Guide', link: '/guide/' },
           { text: 'Components', link: '/components/' },
-          { text: 'v0.5.0', items: [
-            { text: 'Release notes', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' },
-            { text: 'PyPI', link: 'https://pypi.org/project/rinui/' }
+          { text: 'v0.1.0-alpha.1', items: [
+            { text: 'Release notes', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: 'Download Gallery', items: [
-            { text: 'Microsoft Store', link: 'https://apps.microsoft.com/detail/9NJGH90NLXDM?referrer=appbadge&mode=full' },
-            { text: 'GitHub Releases', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' }
+          { text: 'Rust Gallery', items: [
+            { text: 'Build from source', link: '/guide/getting-started' },
+            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
         ],
 
@@ -51,9 +51,11 @@ export default defineConfig({
             {
               text: 'Introduction',
               items: [
-                { text: 'What is RinUI?', link: '/guide/' },
+                { text: 'What is rinui-rs?', link: '/guide/' },
                 { text: 'Getting Started', link: '/guide/getting-started' },
                 { text: 'Project Structure and Resources', link: '/guide/project-structure' },
+                { text: 'Rust Host Integration', link: '/guide/rust-host' },
+                { text: 'Runtime and Sessions', link: '/guide/runtime-sessions' },
               ]
             },
             {
@@ -198,22 +200,22 @@ export default defineConfig({
     zh: {
       label: "简体中文",
       lang: "zh",
-      title: 'RinUI 开发文档',
+      title: 'rinui-rs 开发文档',
 
       themeConfig: {
-        siteTitle: '开发文档',
+        siteTitle: 'Rust Host 开发文档',
         // 导航
         nav: [
           { text: '首页', link: '/zh/' },
           { text: '指南', link: '/zh/guide/' },
           { text: '控件', link: '/zh/components/' },
-          { text: 'v0.5.0', items: [
-            { text: '更新日志 (Releases)', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' },
-            { text: 'PyPI', link: 'https://pypi.org/project/rinui/' }
+          { text: 'v0.1.0-alpha.1', items: [
+            { text: '更新日志 (Releases)', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: '下载 Gallery', items: [
-            { text: 'Microsoft Store', link: 'https://apps.microsoft.com/detail/9NJGH90NLXDM?referrer=appbadge&mode=full' },
-            { text: 'GitHub Releases', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' }
+          { text: 'Rust Gallery', items: [
+            { text: '从源码构建', link: '/zh/guide/getting-started' },
+            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
         ],
 
@@ -223,9 +225,11 @@ export default defineConfig({
             {
               text: 'RinUI 简介',
               items: [
-                { text: '何为 RinUI?', link: '/zh/guide/' },
+                { text: '什么是 rinui-rs？', link: '/zh/guide/' },
                 { text: '快速开始', link: '/zh/guide/getting-started' },
                 { text: '项目结构与资源', link: '/zh/guide/project-structure' },
+                { text: 'Rust Host 接入', link: '/zh/guide/rust-host' },
+                { text: 'Runtime 与 Session', link: '/zh/guide/runtime-sessions' },
               ]
             },
             {
@@ -370,22 +374,22 @@ export default defineConfig({
     ja: {
       label: "日本語",
       lang: "ja",
-      title: 'RinUI ドキュメント',
+      title: 'rinui-rs ドキュメント',
 
       themeConfig: {
-        siteTitle: 'ドキュメント',
+        siteTitle: 'Rust Host ドキュメント',
         // 导航
         nav: [
           { text: 'ホーム', link: '/ja/' },
           { text: 'ガイド', link: '/ja/guide/' },
           { text: 'コンポーネント', link: '/ja/components/' },
-          { text: 'v0.5.0', items: [
-            { text: 'リリースノート', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' },
-            { text: 'PyPI', link: 'https://pypi.org/project/rinui/' }
+          { text: 'v0.1.0-alpha.1', items: [
+            { text: 'リリースノート', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+            { text: 'Rust Host', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
-          { text: 'Gallery をダウンロード', items: [
-            { text: 'Microsoft Store', link: 'https://apps.microsoft.com/detail/9NJGH90NLXDM?referrer=appbadge&mode=full' },
-            { text: 'GitHub Releases', link: 'https://github.com/RinLit-233-shiroko/Rin-UI/releases' }
+          { text: 'Rust Gallery', items: [
+            { text: 'ソースからビルド', link: '/ja/guide/getting-started' },
+            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
           ] },
         ],
 
@@ -395,9 +399,11 @@ export default defineConfig({
             {
               text: 'RinUI 紹介',
               items: [
-                { text: 'RinUIとは？', link: '/ja/guide/' },
+                { text: 'rinui-rs とは？', link: '/ja/guide/' },
                 { text: 'はじめに', link: '/ja/guide/getting-started' },
                 { text: 'プロジェクト構成とリソース', link: '/ja/guide/project-structure' },
+                { text: 'Rust Host の統合', link: '/ja/guide/rust-host' },
+                { text: 'Runtime と Session', link: '/ja/guide/runtime-sessions' },
               ]
             },
             {
@@ -545,13 +551,13 @@ export default defineConfig({
     logo: { light: '/assets/images/brand/rinui-logo-light.png', dark: '/assets/images/brand/rinui-logo-dark.png' },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/RinLit-233-shiroko/Rin-UI' }
+      { icon: 'github', link: 'https://github.com/unDefFtr/rinui-rs' }
     ],
 
     // 页脚
     footer: {
       message: 'Released under the MIT License.',
-      copyright: `Copyright © ${currentYear} RinLit · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer"><strong>琼ICP备2026014960号-1</strong></a>`
+      copyright: `Rust Host © ${currentYear} unDefFtr · Upstream RinUI, documentation and images © 2025 RinLit and contributors`
     }
   }
 })

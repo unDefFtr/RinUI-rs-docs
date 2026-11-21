@@ -1,29 +1,27 @@
 # ユーティリティツール (`Utils`)
 
+`RinUIHost` は Rust テーマバックエンドを初期化し、保存済みの色を `Utils` へ提供します。設定は [Rust Host の統合](/ja/guide/rust-host)を参照してください。既定の保存アクセントは `#605ed2`、フォントとアイコンは QML リソースです。
+
 ## 概要
 
 RinUI はシングルトンオブジェクト `Utils` を提供し、グローバルリソース、フォント、アニメーションの継続時間を管理するために使用されます。これは RinUI アプリケーションにおいて不可欠な補助モジュールです。これらのプロパティの値を変更することで、RinUI の外観と動作をカスタマイズできます。
 
 このようにユーティリティツール `Utils` を使用できます：
 ```qml
+import QtQuick
 import RinUI
 
-Component {
-    // 获取 Utils 属性
-    property var property: Utils.property;
-    
-    // 修改 Utils 属性
-    Component.onCompleted: {
-        Utils.property = newValue;
-    }
+Text {
+    font.family: Utils.fontFamily
+    font.pixelSize: 14
+    text: "RinUI"
 }
-```
 ```
 
 ## 外観とテーマ
 | プロパティ                 | 説明                                                                                                                                                                                                                            |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| primaryColor               | テーマのプライマリカラー、デフォルトではバックエンド設定ファイルのデフォルト値 `#605ed2` を読み取ります <br/> テーマカラーは [`Theme.setThemeColor(color: str)`](/ja/core/theme.md#setthemecolor-color-str) を介して変更することをお勧めします   |
+| primaryColor               | テーマのプライマリカラー、デフォルトではバックエンド設定ファイルのデフォルト値 `#605ed2` を読み取ります <br/> テーマカラーは [`Theme.setThemeColor(color)`](/ja/core/theme.md#modes-and-accent-color) を介して変更することをお勧めします   |
 | colors                     | RinUI で現在選択されているテーマのカラーテーブル。RinUI のすべてのコントロールはこれらのカラーを参照します                                                                                                                                  |
 | appearance                 | 現在のテーマの外観設定（例：角の丸み、影、不透明度）                                                                                                                                                                                       |
 | typography                 | 現在はフォントサイズ情報のみを格納しています                                                                                                                                                                                            |
@@ -56,12 +54,12 @@ Component {
 Qt Quick の `width`、`height`、`font.pixelSize` などは既に論理ピクセルを使用しています。デバイスピクセル比を掛ける必要はありません：
 
 ```qml
-Rectangle {
+Text {
     width: 320
     height: 48
     font.pixelSize: 14
+    text: "RinUI"
 }
-```
 ```
 
 `Utils.dp(320)` や `Utils.dpiScale` を手動で掛けると、HiDPI 環境で二重にスケーリングされます。

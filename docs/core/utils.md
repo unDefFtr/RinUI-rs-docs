@@ -1,29 +1,27 @@
 # Utility Tools (`Utils`)
 
+`RinUIHost` initializes the Rust theme backend that supplies persisted colors to `Utils`. See [Rust Host integration](/guide/rust-host) for configuration. The default stored accent is `#605ed2`; application fonts and icons remain QML resources.
+
 ## Overview
 
 RinUI provides a singleton object `Utils`, used to manage global resources, fonts, and animation durations. This is an indispensable auxiliary module in RinUI applications. You can modify the values of these properties to customize the appearance and behavior of RinUI.
 
 You can use the utility tools `Utils` like this:
 ```qml
+import QtQuick
 import RinUI
 
-Component {
-    // 获取 Utils 属性
-    property var property: Utils.property;
-    
-    // 修改 Utils 属性
-    Component.onCompleted: {
-        Utils.property = newValue;
-    }
+Text {
+    font.family: Utils.fontFamily
+    font.pixelSize: 14
+    text: "RinUI"
 }
-```
 ```
 
 ## Appearance and Theme
 | Property                   | Description                                                                                                                                                                                                                          |
 |----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| primaryColor               | Theme primary color, default reads the backend configuration file default value `#605ed2` <br/> It is recommended to modify the theme color through [`Theme.setThemeColor(color)`](/core/theme#setthemecolor-color)                    |
+| primaryColor               | Theme primary color, default reads the backend configuration file default value `#605ed2` <br/> It is recommended to modify the theme color through [`Theme.setThemeColor(color)`](/core/theme#modes-and-accent-color)                    |
 | colors                     | The color table of the currently selected theme in RinUI, all controls in RinUI will reference these colors                                                                                                                          |
 | appearance                 | Appearance settings of the current theme (such as rounded corners, shadows, opacity)                                                                                                                                                 |
 | typography                 | Currently only stores font size information                                                                                                                                                                                          |
@@ -56,12 +54,12 @@ Component {
 Qt Quick dimensions such as `width`, `height`, and `font.pixelSize` already use logical pixels. Do not multiply them by the device pixel ratio:
 
 ```qml
-Rectangle {
+Text {
     width: 320
     height: 48
     font.pixelSize: 14
+    text: "RinUI"
 }
-```
 ```
 
 Avoid `Utils.dp(320)` and do not manually multiply by `Utils.dpiScale`; doing so applies HiDPI scaling twice.

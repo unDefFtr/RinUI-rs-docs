@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "Qt Quick + PySide"
-  text: "デスクトップアプリ向けの Fluent スタイルオープンソース UI ライブラリ"
-  tagline: "ウィンドウ、ナビゲーション、テーマ、コントロールを、使い慣れた QML で提供します。"
+  name: "Rust + Qt Quick"
+  text: "Rust ネイティブホストで使う Fluent QML コントロール"
+  tagline: "Rust / CXX-Qt 6 と RinUI QML で、ウィンドウ、ナビゲーション、テーマを備えるデスクトップアプリを構築します。"
   image:
     light:
       src: /assets/images/brand/rinui-vertical-light.png
@@ -55,11 +55,11 @@ features:
 
 ## RinUI を選ぶ理由
 
-RinUI は、Qt Quick デスクトップアプリのウィンドウ、ナビゲーション、ページ、テーマ、主要なコントロールを一つの再利用可能な基盤にまとめます。
+`rinui-rs` は上流 RinUI コントロールに再利用可能な Rust / CXX-Qt 6 ホストを提供します。UI は QML のまま、起動、設定、プラットフォーム統合は Rust が担当します。
 
 - **完成したウィンドウ構成**：`FluentWindow`、`NavigationView`、`FluentPage` をそのまま組み合わせられます。
 - **ネイティブなデスクトップ体験**：Windows で Mica、Acrylic、カスタムタイトルバー、標準ウィンドウ操作に対応します。
-- **統一されたデザインシステム**：テーマ、コントロール、アイコン、翻訳、Python 起動コードが同じ API を共有します。
+- **統一されたデザインシステム**：Rust が QML コントロール、テーマ、アイコン、翻訳をホストします。
 
 <GalleryCarousel section="home" />
 
@@ -67,7 +67,7 @@ RinUI は、Qt Quick デスクトップアプリのウィンドウ、ナビゲ�
 
 RinUI は、デスクトップウィンドウと充実したインタラクションが必要で、QML の開発速度も保ちたいプロジェクトに向いています。
 
-- PySide6 と Qt Quick で構築するデスクトップツールやコンテンツ管理アプリ。
+- Rust と Qt Quick で構築するデスクトップツールやコンテンツ管理アプリ。
 - Fluent の視覚言語を取り入れつつ、ウィンドウ構成やコントロール状態を一から作らずに済ませたい社内アプリケーション。
 - ナビゲーション、設定ページ、ダイアログ、テーブル、日付選択、テーマ切り替えを必要とするプロトタイプや継続開発中の製品。
 
@@ -84,6 +84,7 @@ import QtQuick
 import RinUI
 
 FluentWindow {
+    visible: true
     width: 960
     height: 640
 
@@ -97,17 +98,32 @@ FluentWindow {
 }
 ```
 
-Python 側でアプリケーションウィンドウを作成します：
+Rust から QML を読み込みます。完全な Cargo 設定は[はじめに](/ja/guide/getting-started)を参照してください：
 
-```python
-import sys
+```rust
+use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};
+use std::{path::PathBuf, process::ExitCode};
 
-from PySide6.QtWidgets import QApplication
-from RinUI import RinUIWindow
+fn run() -> Result<i32, Box<dyn std::error::Error>> {
+    let mut host = RinUIHost::new(HostConfig {
+        identity: AppIdentity::new("RinUIDocs", "Starter"),
+        resource_mode: ResourceMode::Embedded,
+        ..HostConfig::default()
+    })?;
+    let qml = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("qml/main.qml");
+    host.load(&QmlSource::File(qml))?;
+    Ok(host.exec())
+}
 
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-sys.exit(app.exec())
+fn main() -> ExitCode {
+    match run() {
+        Ok(code) => ExitCode::from((code & 0xff) as u8),
+        Err(error) => {
+            eprintln!("error: {error}");
+            ExitCode::FAILURE
+        }
+    }
+}
 ```
 
 次のページも参照してください：
@@ -117,12 +133,8 @@ sys.exit(app.exec())
 - [NavigationView](/ja/Navigation/NavigationView)
 - [テーマとウィンドウ背景](/ja/core/theme)
 
-::: info プロジェクトの状態
-RinUI は現在も開発中です。API と視覚的な詳細は変更される可能性があります。プロトタイプ、社内ツール、反復コストを受け入れられるプロジェクトでの利用を推奨し、アップグレード前に変更内容を確認してください。
-:::
-
 ## 謝辞
 
-RinUI の開発に参加するコントリビューターとメンテナーに感謝します。
+Rust ホストは [unDefFtr/rinui-rs](https://github.com/unDefFtr/rinui-rs)、QML コントロールと再利用した文書・画像は RinLit と上流 RinUI の貢献者によるものです。画像は上流 QML コンポーネントを紹介します。
 
 [![コントリビューター](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)

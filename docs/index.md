@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: "Qt Quick + PySide"
-  text: "Open-source Fluent UI for desktop applications"
-  tagline: "Windows, navigation, themes, and ready-to-use controls for desktop apps, built with the QML workflow you already know."
+  name: "Rust + Qt Quick"
+  text: "Fluent QML controls with a native Rust host"
+  tagline: "Build desktop apps with Rust / CXX-Qt 6 and RinUI QML controls, themes, and navigation."
   image:
     light:
       src: /assets/images/brand/rinui-vertical-light.png
@@ -55,11 +55,11 @@ features:
 
 ## Why RinUI
 
-RinUI gives Qt Quick desktop applications one reusable foundation for windows, navigation, pages, themes, and familiar controls.
+`rinui-rs` provides a reusable native Rust / CXX-Qt 6 host for upstream RinUI controls. The UI stays in QML; Rust manages application startup, configuration and platform integration.
 
 - **A complete window structure**: `FluentWindow`, `NavigationView`, and `FluentPage` work together out of the box.
 - **Native desktop behavior**: Use Mica, Acrylic, custom title bars, and standard window controls on Windows.
-- **One coherent design system**: Themes, controls, icons, translations, and the Python entry point share the same API.
+- **One coherent design system**: Rust hosts the QML controls, themes, icons and translation resources.
 
 <GalleryCarousel section="home" />
 
@@ -67,7 +67,7 @@ RinUI gives Qt Quick desktop applications one reusable foundation for windows, n
 
 RinUI is intended for projects that need a desktop window and complete interactions while keeping the development speed of QML:
 
-- Desktop tools and content managers built with PySide6 and Qt Quick.
+- Desktop tools and content managers built with Rust and Qt Quick.
 - Internal applications that want a Fluent visual language without rebuilding the window shell and control states from scratch.
 - Prototypes or actively developed products that need navigation, settings pages, dialogs, tables, date selection, and theme switching.
 
@@ -84,6 +84,7 @@ import QtQuick
 import RinUI
 
 FluentWindow {
+    visible: true
     width: 960
     height: 640
 
@@ -97,17 +98,32 @@ FluentWindow {
 }
 ```
 
-Create the application window from Python:
+Load the QML from Rust. The complete Cargo setup is in [Getting Started](/guide/getting-started):
 
-```python
-import sys
+```rust
+use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};
+use std::{path::PathBuf, process::ExitCode};
 
-from PySide6.QtWidgets import QApplication
-from RinUI import RinUIWindow
+fn run() -> Result<i32, Box<dyn std::error::Error>> {
+    let mut host = RinUIHost::new(HostConfig {
+        identity: AppIdentity::new("RinUIDocs", "Starter"),
+        resource_mode: ResourceMode::Embedded,
+        ..HostConfig::default()
+    })?;
+    let qml = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("qml/main.qml");
+    host.load(&QmlSource::File(qml))?;
+    Ok(host.exec())
+}
 
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-sys.exit(app.exec())
+fn main() -> ExitCode {
+    match run() {
+        Ok(code) => ExitCode::from((code & 0xff) as u8),
+        Err(error) => {
+            eprintln!("error: {error}");
+            ExitCode::FAILURE
+        }
+    }
+}
 ```
 
 Continue with:
@@ -117,12 +133,8 @@ Continue with:
 - [NavigationView](/Navigation/NavigationView)
 - [Theme system and window backdrops](/core/theme)
 
-::: info Project status
-RinUI is still under active development. APIs and visual details may continue to change. It is best suited to prototypes, internal tools, and projects that can absorb iteration costs; review release changes before upgrading.
-:::
-
 ## Acknowledgments
 
-Thanks to the contributors and maintainers who help build RinUI.
+Rust host: [unDefFtr/rinui-rs](https://github.com/unDefFtr/rinui-rs). QML controls, reused documentation and images: upstream RinUI by RinLit and contributors. Screenshots illustrate upstream QML components.
 
 [![Contributors](http://contrib.nn.ci/api?repo=rinlit-233-shiroko/Rin-UI)](https://github.com/RinLit-233-shiroko/Rin-UI/graphs/contributors)

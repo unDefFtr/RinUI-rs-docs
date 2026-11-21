@@ -44,27 +44,16 @@ FluentWindow {
 
 When `defaultPage` is empty, `NavigationView` loads the first navigation item. Set `defaultPage` explicitly when a different start page is required.
 
-## Python Startup
+## Rust Startup
 
-`QApplication` must exist before creating `RinUIWindow`:
+Use `RinUIHost` to load this QML on the GUI main thread. The complete Rust entry point and Cargo dependency are in [Getting Started](/guide/getting-started). After loading, use the returned root ID for window-specific configuration:
 
-```python
-import sys
-
-from PySide6.QtWidgets import QApplication
-from RinUI import BackdropEffect, RinUIWindow, Theme
-
-app = QApplication(sys.argv)
-window = RinUIWindow("main.qml")
-
-window.setIcon("assets/app-icon.png")
-window.setTheme(Theme.Auto)
-window.setBackdropEffect(BackdropEffect.Mica)
-
-sys.exit(app.exec())
+```rust
+let loaded = host.load(&QmlSource::File(qml))?;
+host.set_icon(":/app/assets/app-icon.png", Some(loaded.root_id));
 ```
 
-Backdrop effects are Windows-only. On other platforms, use `BackdropEffect.None_`; other values raise `OSError`.
+This fragment uses `host`, `qml` and the `QmlSource` import from Getting Started. Bundle the icon in your application's QRC before using the example path. For theme and backdrop settings, see [Theme](/core/theme).
 
 ## Key Properties
 
@@ -99,13 +88,12 @@ FluentWindow {
     }
 }
 ```
-```
 
 `titleBarArea` sits in the center of the title bar. The leading icon, back button, and window buttons are provided by the navigation bar and `FluentWindowBase`.
 
 ## Window Appearance
 
-`FluentWindowBase` handles the window background, corner radius, border, and theme changes. On Windows, RinUI can use Mica, Acrylic, Tabbed, or no backdrop; macOS uses native traffic-light buttons; other systems fall back to a normal window background.
+`FluentWindowBase` handles the window background, corner radius, border, and theme changes. On Windows, RinUI can use Mica, Acrylic, Tabbed, or no backdrop; macOS defaults to QML titlebar controls in the Rust host, with optional native framing; other systems fall back to a normal window background.
 
 See [Theme](/core/theme) for theme calls.
 

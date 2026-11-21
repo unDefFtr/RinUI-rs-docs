@@ -1,85 +1,42 @@
 # 主题系统（`Theme`）
 
-## 概述
+## 初始化
 
-RinUI 提供了一个轻量的主题管理器。
+`Theme` 是 RinUI 用于管理外观的 QML 单例。`RinUIHost` 会在加载 QML 前初始化其后端。自定义引擎的接入方式见 [Runtime 与 Session](/zh/guide/runtime-sessions)。
 
-仅需 `import RinUI`，即可立即获得全局主题支持。主题系统以单例 `pragma Singleton` 的形式存在，适用于整个应用的风格切换与一致性维护。
-
-您可以像这样使用主题`Theme`系统：
 ```qml
+import QtQuick
 import RinUI
 
-Component {
-    Component.onCompleted: {
-        Theme.function()
-    }
+Item {
+    Component.onCompleted: Theme.setTheme(Theme.mode.Auto)
 }
 ```
 
-## 主题模式
+## 主题模式与强调色 {#modes-and-accent-color}
 
-### `setTheme(mode: Theme.mode)`
-`setTheme`函数用于切换 RinUI 全部组件的深浅色主题。该函数接受以下值：
+| API | 行为 |
+| --- | --- |
+| `Theme.setTheme(Theme.mode.Light / Dark / Auto)` | 选择浅色、深色或跟随系统。 |
+| `Theme.toggleMode()` | 按实际外观切换深浅色，不在 Auto 等三种模式之间轮换。 |
+| `Theme.getTheme()` | 配置模式：`"Light"`、`"Dark"` 或 `"Auto"`。 |
+| `Theme.currentTheme.isDark` / `Theme.isDark()` | 实际外观，Auto 模式下也可使用。 |
+| `Theme.setThemeColor(color)` | 以十六进制字符串或 QML color 值设置强调色。 |
+| `Theme.getThemeColor()` | 当前 QML color，后端未初始化时返回 `"transparent"`。 |
 
-- `Theme.mode.Light`：切换为浅色主题
-- `Theme.mode.Dark`：切换为深色主题
-- `Theme.mode.Auto`：自动切换主题，根据当前系统的主题模式决定切换为浅色或深色主题
+`HostConfig.config_location` 控制主题设置的存储方式。存储配置与 Rust 调用方式见 [Rust Host 接入](/zh/guide/rust-host)。
 
-### `toggleMode()`
-`toggleMode` 会根据当前实际外观在 `Theme.mode.Light` 与 `Theme.mode.Dark` 之间切换。当前为深色时切换到浅色，当前为浅色时切换到深色：
+## Windows 背景效果
 
-```qml
-Theme.toggleMode()
-```
+在窗口加载后调用 `Theme.setBackdropEffect(Theme.effect.Mica / Acrylic / Tabbed / None)`。`Theme.getBackdropEffect()` 返回 `"mica"`、`"acrylic"`、`"tabbed"` 或 `"none"`。
 
-该函数不会在 `Light`、`Dark` 与 `Auto` 三种配置模式之间轮换；需要进入或离开自动模式时，请直接调用 `setTheme()`。
+| 效果 | 平台支持 |
+| --- | --- |
+| Mica | Windows 11。 |
+| Acrylic | Windows 10；Windows 11 21H2 请求时回退为 Mica。 |
+| Tabbed | Windows 11 22H2+；Windows 11 21H2 请求时回退为 Mica。 |
+| None | 关闭 Windows 背景材质；其他平台使用正常背景。 |
 
-### `getTheme() -> str`
-`getTheme` 函数用于获取当前保存的主题配置模式。函数会返回下列值：
+Rust 背景效果的调用方式与返回码见 [Rust Host 接入](/zh/guide/rust-host#windows-背景与窗口配置)。
 
-- `"Light"`：当前主题为浅色
-- `"Dark"`：当前主题为深色
-- `"Auto"`：当前主题为自动模式
-
-`Auto` 模式下，`getTheme()` 仍返回 `"Auto"`，不会展开成当前实际使用的亮色或暗色。需要判断当前实际外观时，读取以下属性：
-
-```qml
-let darkNow = Theme.currentTheme.isDark
-```
-
-也可以调用 `Theme.isDark()`，它会直接返回 `currentTheme.isDark`。
-
-### `setThemeColor(color)`
-`setThemeColor` 函数用于设置 RinUI 组件的强调色。它接受十六进制颜色字符串或 QML `color` 值，例如 `"#FF0000"` 代表红色。
-
-### `getThemeColor() -> color`
-`getThemeColor` 函数返回当前强调色对应的 QML `color` 值。主题管理器尚未初始化时会返回 `"transparent"`。
-
-## 背景效果
-
-> [!NOTE]
-> 背景效果的设置仅在 Windows 平台上有效，且部分效果需要 Windows 11 及以上版本。
-> 
-> | 效果       | 支持的系统版本       |
-> |----------|---------------|
-> | Mica     | > Windows 11  |
-> | Acrylic  | >= Windows 10 |
-> | Tabbed   | > Windows 11  |
-
-### `setBackdropEffect(effect: Theme.effect)`
-`setBackdropEffect`函数用于设置 RinUI 组件的背景效果。该函数接受以下值：
-
-- `Theme.effect.Mica`：云母背景效果
-- `Theme.effect.Acrylic`：亚克力背景效果
-- `Theme.effect.Tabbed`：选项卡背景 (Mica Alt) 效果
-- `Theme.effect.None`：无背景效果
-
-### `getBackdropEffect() -> str`
-`getBackdropEffect`函数用于获取当前组件的背景效果。函数会返回下列值：
-
-- `"mica"`：云母背景效果
-- `"acrylic"`：亚克力背景效果
-- `"tabbed"`：选项卡背景 (Mica Alt) 效果
-- `"none"`：无背景效果
-
+参见 [FluentWindow](/zh/Windowing/FluentWindow) 和[项目结构与资源](/zh/guide/project-structure)。
