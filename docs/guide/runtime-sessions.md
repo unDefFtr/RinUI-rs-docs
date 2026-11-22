@@ -71,7 +71,11 @@ fn integrate(app: &QGuiApplication) -> Result<(), Box<dyn std::error::Error>> {
 
 For an existing Qt Widgets `QApplication`, use an appropriate Qt upcast or the advanced `unsafe attach_existing_raw` API. A raw pointer must identify the live active GUI application, be used on its GUI thread, and outlive the runtime, sessions and handles. Refer to the repository's external application tests rather than guessing pointer casts.
 
+The upstream Qt Widgets integration test uses the `qt-widgets-test` feature, which is disabled by default.
+
 The owner drives the event loop. Calling `runtime.exec()` on a borrowed application returns `BorrowedApplicationExecNotAllowed`; dropping the runtime does not destroy the external application. `apply_identity_to_borrowed_app` defaults to `false`. Match the existing Qt Quick Controls style; requesting a conflicting initialized style returns `IncompatibleQuickControlsStyle`.
+
+When teardown is deferred, let the external event loop deliver Qt’s deferred deletion events after the current callback returns. Wait for teardown to complete before attaching another runtime.
 
 ## Engine configuration and multiple windows
 
@@ -81,4 +85,4 @@ Use `sync_windows()` to discover dynamically created RinUI windows and `register
 
 See [Configuration and Rust/QML Integration](rust-host) and [Project Structure and Resources](project-structure).
 
-[Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)
+[RinUIRuntime](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUIRuntime.html) · [RinUISession](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUISession.html) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/tests/external_qapplication.rs)

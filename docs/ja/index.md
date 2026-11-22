@@ -102,7 +102,7 @@ FluentWindow {
 }
 ```
 
-Rust から QML を読み込みます。完全な Cargo 設定は[はじめに](/ja/guide/getting-started)を参照してください：
+crates.io の `rinui-host` を使って Rust から QML を読み込みます。Cargo の設定は[はじめに](/ja/guide/getting-started)を参照してください。
 
 ```rust
 use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};

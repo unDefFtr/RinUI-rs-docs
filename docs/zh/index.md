@@ -103,7 +103,7 @@ FluentWindow {
 }
 ```
 
-从 Rust 加载 QML，完整 Cargo 配置见[快速开始](/zh/guide/getting-started)：
+使用 crates.io 上的 `rinui-host` 从 Rust 加载 QML。完整 Cargo 配置见[快速开始](/zh/guide/getting-started)。
 
 ```rust
 use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};

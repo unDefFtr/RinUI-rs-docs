@@ -102,7 +102,7 @@ FluentWindow {
 }
 ```
 
-Load the QML from Rust. The complete Cargo setup is in [Getting Started](/guide/getting-started):
+Load the QML from Rust with `rinui-host` from crates.io. See [Getting Started](/guide/getting-started) for the complete Cargo setup.
 
 ```rust
 use rinui_host::{AppIdentity, HostConfig, QmlSource, ResourceMode, RinUIHost};

@@ -19,7 +19,7 @@ import RinUI
 
 ## 最初に読むページ
 
-- [はじめに](getting-started)：RinUI-rs Gallery と最小 Rust アプリ。
+- [はじめに](getting-started)では、crates.io のクレートを使った Rust アプリの作り方と、Gallery のダウンロード・ビルド方法を紹介します。
 - [プロジェクト構成とリソース](project-structure)：import、リソースモード、QRC、配布。
 - [設定と Rust/QML 連携](rust-host)：設定、テーマ、翻訳、Rust/QML 連携。
 - [Runtime と Session](runtime-sessions)：共有／専用エンジンと既存 Qt アプリ。

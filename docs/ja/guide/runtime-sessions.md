@@ -71,7 +71,11 @@ fn integrate(app: &QGuiApplication) -> Result<(), Box<dyn std::error::Error>> {
 
 Qt Widgets の `QApplication` には適切な Qt upcast、または上級用 `unsafe attach_existing_raw` API を使います。raw ポインターは現在存続中の GUI アプリを指し、GUI スレッドで使用し、Runtime、Session、ハンドルより長く存続する必要があります。推測したポインターキャストではなく、外部アプリのテストを参照してください。
 
+上流の Qt Widgets 統合テストでは、既定で無効になっている `qt-widgets-test` feature を使います。
+
 イベントループは元の所有側が実行します。借用アプリで `runtime.exec()` を呼ぶと `BorrowedApplicationExecNotAllowed` になります。Runtime を破棄しても外部アプリは破棄されません。`apply_identity_to_borrowed_app` の既定値は `false` です。既存の Qt Quick Controls スタイルに合わせてください。初期化済みスタイルと衝突すると `IncompatibleQuickControlsStyle` になります。
+
+破棄が遅延された場合、現在のコールバックから戻った後に、外部イベントループで Qt の遅延削除イベントを処理します。破棄が完了してから次の Runtime を接続してください。
 
 ## エンジン設定と複数ウィンドウ
 
@@ -81,4 +85,4 @@ QML 読み込み前に `session.configure_engine(...)` で import／plugin パ�
 
 [設定と Rust/QML 連携](rust-host)、[プロジェクト構成とリソース](project-structure)も参照してください。
 
-[Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)
+[RinUIRuntime](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUIRuntime.html) · [RinUISession](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUISession.html) · [外部 QApplication のテスト](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/tests/external_qapplication.rs)

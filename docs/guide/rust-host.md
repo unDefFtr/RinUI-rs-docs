@@ -17,6 +17,8 @@ This guide builds on the application from [Getting Started](getting-started) to 
 
 The host persists `rin_ui.json` through `ConfigStore`. `Standard` uses Qt's application local data location; `CustomDir(dir)` writes to `<dir>/RinUI/config/rin_ui.json`; it does not append the application identity, so choose a separate directory per application. `InMemory` performs no configuration disk I/O. `config_store().borrow().path()` returns the actual optional filename. Configuration supports migration of legacy schema and recovery of corrupt files with a backup. Business data should use a separate store.
 
+For platform capabilities and configuration storage on their own, add `rinui-platform = "0.1.0-alpha.2"` to your dependencies. This crate works without Qt. [crates.io](https://crates.io/crates/rinui-platform/0.1.0-alpha.2) · [Rust API](https://docs.rs/rinui-platform/0.1.0-alpha.2/rinui_platform/)
+
 ## Values, methods, theme and translation
 
 Replace the minimal application's two files below, keeping its `Cargo.toml`, then run `cargo run`. Register context properties before loading QML. The example reads/writes a root property, invokes a typed QML method, sets the theme and switches language.
@@ -213,4 +215,4 @@ Windows 10 supports Acrylic; Windows 11 supports Mica; Tabbed requires Windows 1
 
 For icons, use `host.set_icon(path, Some(loaded.root_id))` after loading; use an application QRC path when distributing. See [FluentWindow](/Windowing/FluentWindow) and [Runtime and Sessions](runtime-sessions).
 
-[rinui-host public API](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/lib.rs) · [Gallery backend](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/backend.rs)
+[rinui-host Rust API](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/) · [Gallery backend](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/backend.rs)

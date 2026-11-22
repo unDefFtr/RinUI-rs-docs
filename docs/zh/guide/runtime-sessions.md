@@ -71,7 +71,11 @@ fn integrate(app: &QGuiApplication) -> Result<(), Box<dyn std::error::Error>> {
 
 接入 Qt Widgets 的 `QApplication` 时，可使用合适的 Qt 向上转型，或进阶的 `unsafe attach_existing_raw` API。原始指针必须指向当前存活的 GUI 应用，在 GUI 线程使用，且其生命周期覆盖 Runtime、Session 和句柄。请参考仓库外部应用测试，不要猜测指针转换。
 
+上游 Qt Widgets 集成测试使用 `qt-widgets-test` feature，默认关闭。
+
 事件循环由原应用驱动。借用模式调用 `runtime.exec()` 会返回 `BorrowedApplicationExecNotAllowed`，释放 Runtime 不会销毁外部应用。`apply_identity_to_borrowed_app` 默认 `false`。Qt Quick Controls 样式应与已有应用一致，冲突时返回 `IncompatibleQuickControlsStyle`。
+
+如果销毁操作被延迟，当前回调返回后应由外部事件循环继续处理 Qt 的延迟删除事件。等销毁完成后再接入新的 Runtime。
 
 ## 引擎配置与多窗口
 
@@ -81,4 +85,4 @@ fn integrate(app: &QGuiApplication) -> Result<(), Box<dyn std::error::Error>> {
 
 参见 [配置与 Rust/QML 交互](rust-host)和[项目结构与资源](project-structure)。
 
-[Runtime/session implementation](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/runtime.rs) · [External QApplication test](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/tests/external_qapplication.rs)
+[RinUIRuntime](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUIRuntime.html) · [RinUISession](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/struct.RinUISession.html) · [外部 QApplication 测试](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/tests/external_qapplication.rs)

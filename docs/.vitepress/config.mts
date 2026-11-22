@@ -104,13 +104,15 @@ export default defineConfig({
           { text: 'Home', link: '/' },
           { text: 'Guide', link: '/guide/' },
           { text: 'Components', link: '/components/' },
-          { text: 'v0.1.0-alpha.1', items: [
-            { text: 'Release notes', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+          { text: 'v0.1.0-alpha.2', items: [
+            { text: 'Release notes', link: 'https://github.com/unDefFtr/rinui-rs/releases/tag/v0.1.0-alpha.2' },
+            { text: 'crates.io · rinui-host', link: 'https://crates.io/crates/rinui-host/0.1.0-alpha.2' },
+            { text: 'docs.rs · rinui-host', link: 'https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/' },
             { text: 'RinUI-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
           { text: 'RinUI-rs Gallery', items: [
-            { text: 'Build from source', link: '/guide/getting-started' },
-            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
+            { text: 'Download Gallery', link: '/guide/getting-started#gallery-downloads' },
+            { text: 'Build from source', link: '/guide/getting-started#build-gallery-from-source' }
           ] },
         ],
 
@@ -260,13 +262,15 @@ export default defineConfig({
           { text: '首页', link: '/zh/' },
           { text: '指南', link: '/zh/guide/' },
           { text: '控件', link: '/zh/components/' },
-          { text: 'v0.1.0-alpha.1', items: [
-            { text: '更新日志 (Releases)', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+          { text: 'v0.1.0-alpha.2', items: [
+            { text: '更新日志 (Releases)', link: 'https://github.com/unDefFtr/rinui-rs/releases/tag/v0.1.0-alpha.2' },
+            { text: 'crates.io · rinui-host', link: 'https://crates.io/crates/rinui-host/0.1.0-alpha.2' },
+            { text: 'docs.rs · rinui-host', link: 'https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/' },
             { text: 'RinUI-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
           { text: 'RinUI-rs Gallery', items: [
-            { text: '从源码构建', link: '/zh/guide/getting-started' },
-            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
+            { text: '下载 Gallery', link: '/zh/guide/getting-started#gallery-downloads' },
+            { text: '从源码构建', link: '/zh/guide/getting-started#build-gallery-from-source' }
           ] },
         ],
 
@@ -416,13 +420,15 @@ export default defineConfig({
           { text: 'ホーム', link: '/ja/' },
           { text: 'ガイド', link: '/ja/guide/' },
           { text: 'コンポーネント', link: '/ja/components/' },
-          { text: 'v0.1.0-alpha.1', items: [
-            { text: 'リリースノート', link: 'https://github.com/unDefFtr/rinui-rs/releases' },
+          { text: 'v0.1.0-alpha.2', items: [
+            { text: 'リリースノート', link: 'https://github.com/unDefFtr/rinui-rs/releases/tag/v0.1.0-alpha.2' },
+            { text: 'crates.io · rinui-host', link: 'https://crates.io/crates/rinui-host/0.1.0-alpha.2' },
+            { text: 'docs.rs · rinui-host', link: 'https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/' },
             { text: 'RinUI-rs', link: 'https://github.com/unDefFtr/rinui-rs' }
           ] },
           { text: 'RinUI-rs Gallery', items: [
-            { text: 'ソースからビルド', link: '/ja/guide/getting-started' },
-            { text: 'GitHub Releases', link: 'https://github.com/unDefFtr/rinui-rs/releases' }
+            { text: 'Gallery をダウンロード', link: '/ja/guide/getting-started#gallery-downloads' },
+            { text: 'ソースからビルド', link: '/ja/guide/getting-started#build-gallery-from-source' }
           ] },
         ],
 

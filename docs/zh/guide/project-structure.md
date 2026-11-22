@@ -3,19 +3,17 @@
 Rust 启动与业务逻辑放在 `src/`，页面和图片放在 `qml/`。RinUI 控件仍通过 QML 的 `import RinUI` 导入。完整起点见[快速开始](getting-started)。
 
 ```text
-projects/
-├── rinui-rs/
-└── rinui-starter/
-    ├── Cargo.toml
-    ├── build.rs              # optional: application QRC / CXX-Qt backend
-    ├── resources.qrc         # optional: application resources
-    ├── src/
-    │   ├── main.rs
-    │   └── backend.rs        # optional: application QObject
-    └── qml/
-        ├── main.qml
-        ├── pages/Home.qml
-        └── assets/images/logo.png
+rinui-starter/
+├── Cargo.toml
+├── build.rs              # 可选：应用 QRC / CXX-Qt 后端
+├── resources.qrc         # 可选：应用资源
+├── src/
+│   ├── main.rs
+│   └── backend.rs        # 可选：应用 QObject
+└── qml/
+    ├── main.qml
+    ├── pages/Home.qml
+    └── assets/images/logo.png
 ```
 
 ## 资源模式 {#resource-modes}
@@ -28,9 +26,9 @@ projects/
 | `Filesystem(path)` | 包含 `RinUI/qmldir` 的 checkout，也接受直接传入 `RinUI/` 目录。 |
 | `Auto` | 优先使用非空 `RINUI_DEV_PATH`，否则选择 `Embedded`。 |
 
-文件系统模式在启动时读取资源，不自动监听或热重载。界面使用期间需保持宿主／Session 存活。
+文件系统模式在启动时创建一份经过整理的 RinUI 资源临时副本，源文件保持原样。此模式不监听文件变化，也不提供热重载。界面使用期间需保持宿主或 Session 存活。最后一个相关的引擎与资源视图释放后，临时副本会被清理。`0.1.0-alpha.2` 修复了 Windows 上图标字体持续占用暂存文件、导致最后一个 Session 关闭后无法清理的问题。
 
-**构建期：** `RINUI_UPSTREAM_DIR` 可覆盖用于内嵌的上游源码位置，接受上游仓库目录或其 `RinUI/` 子目录；原生源码仍需完整 `rinui-rs` checkout。
+**构建期。** `rinui-host` 从 crate 的 `native/` 构建原生桥接代码，默认内嵌 `vendor/RinUI` 中的 QML。可设置 `RINUI_UPSTREAM_DIR` 来更换内嵌 QML 的来源。它接受包含 `RinUI/qmldir` 的目录，也接受直接包含 `qmldir` 的 `RinUI/` 目录。如果从覆盖路径找不到 `qmldir`，构建会失败。
 
 **运行期：** `RINUI_DEV_PATH` 影响 `Auto` 的选择，不能修改已编译进 `Embedded` 应用的资源。发布时建议显式选择 `Embedded`。
 
@@ -99,7 +97,7 @@ bash scripts/package_linux.sh
 
 ## 排查问题与 HiDPI
 
-- 编译期找不到上游资源：初始化子模块，核对 `RINUI_UPSTREAM_DIR`。
+- 编译时报 `RinUI qmldir not found`：取消设置 `RINUI_UPSTREAM_DIR` 以使用随附资源，或将其指向有效目录。如果正在构建 Gallery 且缺少上游示例，运行 `git submodule update --init --recursive` 初始化子模块。
 - `module "RinUI" is not installed`：查看 `host.import_paths()` 和资源模式，检查 `RINUI_DEV_PATH`。
 - QML 加载失败：检查 `HostError::QmlLoadFailed` 与 `host.qml_warnings()`，核对文件名、导入、应用资源别名。
 - 缺少 Qt 平台插件或 Qt5Compat 模块：发布包中需携带 Qt 插件与 QML 模块。
@@ -107,4 +105,4 @@ bash scripts/package_linux.sh
 
 参见[主题系统](/zh/core/theme)、[辅助工具](/zh/core/utils)和 [配置与 Rust/QML 交互](rust-host)。
 
-[rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)
+[rinui-host 资源实现](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/src/resources.rs) · [Gallery 命令行](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/main.rs)

@@ -19,7 +19,7 @@ import RinUI
 
 ## 从哪里开始
 
-- [快速开始](getting-started)：构建 RinUI-rs Gallery 与最小 Rust 应用。
+- [快速开始](getting-started)介绍如何从 crates.io 接入 RinUI.rs，以及如何下载或构建 Gallery。
 - [项目结构与资源](project-structure)：导入、资源模式、QRC 与打包。
 - [配置与 Rust/QML 交互](rust-host)：配置、主题、翻译和 Rust/QML 交互。
 - [Runtime 与 Session](runtime-sessions)：共享／独立引擎与已有 Qt 应用。

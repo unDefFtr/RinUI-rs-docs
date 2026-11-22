@@ -30,7 +30,7 @@ npm run docs:preview
 
 The Guide sidebar is shared by the `guide/`, `core/`, and `Design/` routes for each locale. When adding a Guide article under a new route prefix, map that prefix to the same localized sidebar in `docs/.vitepress/config.mts`.
 
-The Rust examples expect a complete `rinui-rs` checkout beside the example application, including its upstream submodule. See the getting-started guides for Qt and C++ requirements.
+The Rust examples use `rinui-host` from crates.io. See the getting-started guides for the Qt development environment and C++ toolchain. Building the Gallery from source requires a separate `rinui-rs` checkout with its submodule.
 
 ## Attribution and license
 
@@ -39,4 +39,4 @@ Upstream RinUI QML components, reused documentation and images: Copyright © 202
 
 Thanks to [RinUI](https://github.com/RinLit-233-shiroko/Rin-UI), [CXX-Qt](https://github.com/KDAB/cxx-qt), Qt Quick, Fluent Design, Fluent UI System Icons and [VitePress](https://github.com/vuejs/vitepress).
 
-This documentation is licensed under the [MIT License](LICENSE). Dependency notices are maintained in [RinUI-rs/THIRD_PARTY_NOTICES.md](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/THIRD_PARTY_NOTICES.md).
+This documentation is licensed under the [MIT License](LICENSE). See the [RinUI-rs third-party notices](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/THIRD_PARTY_NOTICES.md) for dependency attribution.

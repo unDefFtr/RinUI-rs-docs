@@ -3,19 +3,17 @@
 Keep Rust startup and business logic in `src/`, and pages and images in `qml/`. RinUI controls remain QML components imported with `import RinUI`. Start from the complete application in [Getting Started](getting-started).
 
 ```text
-projects/
-├── rinui-rs/
-└── rinui-starter/
-    ├── Cargo.toml
-    ├── build.rs              # optional: application QRC / CXX-Qt backend
-    ├── resources.qrc         # optional: application resources
-    ├── src/
-    │   ├── main.rs
-    │   └── backend.rs        # optional: application QObject
-    └── qml/
-        ├── main.qml
-        ├── pages/Home.qml
-        └── assets/images/logo.png
+rinui-starter/
+├── Cargo.toml
+├── build.rs              # optional: application QRC / CXX-Qt backend
+├── resources.qrc         # optional: application resources
+├── src/
+│   ├── main.rs
+│   └── backend.rs        # optional: application QObject
+└── qml/
+    ├── main.qml
+    ├── pages/Home.qml
+    └── assets/images/logo.png
 ```
 
 ## Resource modes {#resource-modes}
@@ -28,9 +26,9 @@ projects/
 | `Filesystem(path)` | Checkout containing `RinUI/qmldir`; passing the `RinUI/` directory itself is also supported. |
 | `Auto` | Nonempty `RINUI_DEV_PATH`, otherwise `Embedded`. |
 
-Filesystem mode reads resources at startup and does not automatically watch or reload changes. Keep the host/session alive while the UI is in use.
+At startup, filesystem mode creates a sanitized temporary copy of the RinUI resources and leaves the source files intact. It does not watch files or hot reload them. Keep the host or session alive while the UI is in use. The temporary copy is cleaned up when the last associated engine and resource view are released. In `0.1.0-alpha.2`, the final session can release staged resources on Windows without the icon font holding the files open.
 
-**Build time:** `RINUI_UPSTREAM_DIR` optionally overrides the source used to embed RinUI. It accepts the upstream checkout or its `RinUI/` directory. Native sources still come from the complete `rinui-rs` checkout.
+**Build time.** `rinui-host` builds its native bridges from `native/` in the crate and embeds the QML from `vendor/RinUI` by default. Set `RINUI_UPSTREAM_DIR` to use a different source for the embedded QML. It accepts a directory containing `RinUI/qmldir` or the `RinUI/` directory containing `qmldir`. The build fails if the override cannot supply `qmldir`.
 
 **Runtime:** `RINUI_DEV_PATH` changes `Auto` selection. It cannot change resources already compiled into an `Embedded` application. For predictable releases, explicitly select `Embedded`.
 
@@ -99,7 +97,7 @@ These scripts target the Gallery and assemble Qt libraries, plugins, QML runtime
 
 ## Troubleshooting and HiDPI
 
-- Missing upstream resources during compilation: initialize the submodule and verify `RINUI_UPSTREAM_DIR`.
+- `RinUI qmldir not found` during compilation: unset `RINUI_UPSTREAM_DIR` to use the bundled sources or point it to a valid directory. If building the Gallery and the upstream examples are missing, initialize its submodule with `git submodule update --init --recursive`.
 - `module "RinUI" is not installed`: inspect `host.import_paths()` and the selected resource mode; check `RINUI_DEV_PATH`.
 - QML loading errors: inspect `HostError::QmlLoadFailed` and `host.qml_warnings()`; check the QML filename, imports and application resource aliases.
 - Missing Qt platform plugin or Qt5Compat module: deploy Qt's plugins and QML modules alongside the application.
@@ -107,4 +105,4 @@ These scripts target the Gallery and assemble Qt libraries, plugins, QML runtime
 
 See [Theme](/core/theme), [Utils](/core/utils) and [Configuration and Rust/QML Integration](rust-host).
 
-[rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)
+[rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/main.rs)

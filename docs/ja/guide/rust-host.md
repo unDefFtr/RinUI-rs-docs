@@ -17,6 +17,8 @@
 
 ホストは `ConfigStore` で `rin_ui.json` を保存します。`Standard` は Qt のアプリローカルデータ領域を使い、`CustomDir(dir)` は `<dir>/RinUI/config/rin_ui.json` に書き込み、アプリ名は追加しません。アプリごとに別のディレクトリを指定してください。`InMemory` は設定ファイルを読み書きしません。`config_store().borrow().path()` で実際のファイル名（省略可能）を確認できます。旧 schema の移行と、破損ファイルのバックアップ／復旧をサポートします。業務データには別のストアを使ってください。
 
+プラットフォーム機能の判定と設定の永続化だけを使う場合は、依存関係に `rinui-platform = "0.1.0-alpha.2"` を追加します。このクレートは Qt なしで使えます。[crates.io](https://crates.io/crates/rinui-platform/0.1.0-alpha.2) · [Rust API](https://docs.rs/rinui-platform/0.1.0-alpha.2/rinui_platform/)
+
 ## 値、メソッド、テーマ、翻訳
 
 最小アプリの以下 2 ファイルを置き換え、`Cargo.toml` は維持して `cargo run` を実行します。コンテキストプロパティを QML 読み込み前に登録します。ルートプロパティの読み書き、型付き QML メソッドの呼び出し、テーマ設定と言語切り替えを示します。
@@ -213,4 +215,4 @@ Windows 10 は Acrylic、Windows 11 は Mica、Windows 11 22H2 以降は Tabbed 
 
 アイコンは読み込み後に `host.set_icon(path, Some(loaded.root_id))` で設定します。配布にはアプリの QRC パスを使ってください。[FluentWindow](/ja/Windowing/FluentWindow) と [Runtime と Session](runtime-sessions)も参照してください。
 
-[rinui-host public API](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/lib.rs) · [Gallery backend](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/backend.rs)
+[rinui-host Rust API](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/) · [Gallery バックエンド](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/backend.rs)

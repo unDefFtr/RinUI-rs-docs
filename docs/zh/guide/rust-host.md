@@ -17,6 +17,8 @@
 
 宿主通过 `ConfigStore` 保存 `rin_ui.json`。`Standard` 使用 Qt 应用本地数据目录；`CustomDir(dir)` 写入 `<dir>/RinUI/config/rin_ui.json`，不会再追加应用身份，因此应为每个应用选独立目录；`InMemory` 不读写配置磁盘文件。`config_store().borrow().path()` 可获取实际文件名（可能为 `None`）。配置支持旧 schema 迁移，以及损坏文件的备份与恢复。业务数据应另用独立存储。
 
+如果只用到平台能力检测和配置持久化，可直接添加 `rinui-platform = "0.1.0-alpha.2"`。这个 crate 无需 Qt。[crates.io](https://crates.io/crates/rinui-platform/0.1.0-alpha.2) · [Rust API](https://docs.rs/rinui-platform/0.1.0-alpha.2/rinui_platform/)
+
 ## 数值、方法、主题与翻译
 
 替换最小工程中的以下两个文件，保留 `Cargo.toml`，然后执行 `cargo run`。上下文属性在加载 QML 前注册；此例演示根属性读写、带类型的 QML 方法调用、主题设置和语言切换。
@@ -213,4 +215,4 @@ Windows 10 支持 Acrylic；Windows 11 支持 Mica；Tabbed 要求 Windows 11 22
 
 图标可在加载后通过 `host.set_icon(path, Some(loaded.root_id))` 设置，发布时使用应用 QRC 路径。参见 [FluentWindow](/zh/Windowing/FluentWindow) 和 [Runtime 与 Session](runtime-sessions)。
 
-[rinui-host public API](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/lib.rs) · [Gallery backend](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/backend.rs)
+[rinui-host Rust API](https://docs.rs/rinui-host/0.1.0-alpha.2/rinui_host/) · [Gallery 后端](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/backend.rs)

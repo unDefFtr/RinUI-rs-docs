@@ -19,7 +19,7 @@ import RinUI
 
 ## Start here
 
-- [Getting Started](getting-started): build RinUI-rs Gallery and a minimal Rust application.
+- [Getting Started](getting-started) explains how to build a Rust app with the published crate and how to download or build the Gallery.
 - [Project Structure and Resources](project-structure): imports, resource modes, QRC and packaging.
 - [Configuration and Rust/QML Integration](rust-host): configuration, theme, translation and Rust/QML interaction.
 - [Runtime and Sessions](runtime-sessions): shared/private engines and existing Qt applications.

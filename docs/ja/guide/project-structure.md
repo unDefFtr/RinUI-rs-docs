@@ -3,19 +3,17 @@
 Rust の起動処理とビジネスロジックは `src/`、ページと画像は `qml/` に置きます。RinUI コントロールは QML の `import RinUI` で利用します。出発点となる完全なアプリは[はじめに](getting-started)を参照してください。
 
 ```text
-projects/
-├── rinui-rs/
-└── rinui-starter/
-    ├── Cargo.toml
-    ├── build.rs              # optional: application QRC / CXX-Qt backend
-    ├── resources.qrc         # optional: application resources
-    ├── src/
-    │   ├── main.rs
-    │   └── backend.rs        # optional: application QObject
-    └── qml/
-        ├── main.qml
-        ├── pages/Home.qml
-        └── assets/images/logo.png
+rinui-starter/
+├── Cargo.toml
+├── build.rs              # 任意：アプリの QRC / CXX-Qt バックエンド
+├── resources.qrc         # 任意：アプリのリソース
+├── src/
+│   ├── main.rs
+│   └── backend.rs        # 任意：アプリの QObject
+└── qml/
+    ├── main.qml
+    ├── pages/Home.qml
+    └── assets/images/logo.png
 ```
 
 ## リソースモード {#resource-modes}
@@ -28,9 +26,9 @@ projects/
 | `Filesystem(path)` | `RinUI/qmldir` を含む checkout。`RinUI/` ディレクトリ自体も指定可能。 |
 | `Auto` | 空でない `RINUI_DEV_PATH`、それ以外は `Embedded`。 |
 
-ファイルシステムモードは起動時にリソースを読み込み、自動監視やホットリロードは行いません。UI の使用中はホスト／Session を保持してください。
+ファイルシステムモードでは、起動時に RinUI リソースを整えた一時コピーを作成し、元のファイルを保持します。ファイルの自動監視やホットリロードは行いません。UI の使用中はホストまたは Session を保持してください。関連するエンジンとリソースビューがすべて解放されると、一時コピーが削除されます。`0.1.0-alpha.2` では、Windows でアイコンフォントが一時ファイルを開いたままになり、最後の Session を閉じても削除できない問題を修正しました。
 
-**ビルド時：** `RINUI_UPSTREAM_DIR` は内蔵する上流ソースの場所を変更します。上流 checkout またはその `RinUI/` ディレクトリを指定できます。ネイティブソースには完全な `rinui-rs` checkout が必要です。
+**ビルド時。** `rinui-host` はクレート内の `native/` からネイティブブリッジをビルドし、既定で `vendor/RinUI` の QML を内蔵します。内蔵する QML の取得元を変更するには `RINUI_UPSTREAM_DIR` を設定します。`RinUI/qmldir` を含むディレクトリか、`qmldir` を直接含む `RinUI/` ディレクトリを指定できます。指定先に `qmldir` が見つからない場合、ビルドは失敗します。
 
 **実行時：** `RINUI_DEV_PATH` は `Auto` の選択に影響します。`Embedded` にコンパイル済みの内容は変更しません。配布には `Embedded` を明示することを推奨します。
 
@@ -99,7 +97,7 @@ bash scripts/package_linux.sh
 
 ## トラブルシューティングと HiDPI
 
-- ビルド時に上流リソースがない：サブモジュールと `RINUI_UPSTREAM_DIR` を確認します。
+- コンパイル時に `RinUI qmldir not found` が出る場合は、`RINUI_UPSTREAM_DIR` を解除して同梱リソースを使うか、有効なディレクトリを指定してください。Gallery のビルドで上流のサンプルが見つからない場合は `git submodule update --init --recursive` でサブモジュールを初期化します。
 - `module "RinUI" is not installed`：`host.import_paths()`、リソースモード、`RINUI_DEV_PATH` を確認します。
 - QML 読み込み失敗：`HostError::QmlLoadFailed` と `host.qml_warnings()` でファイル、import、リソースのエイリアスを調べます。
 - Qt プラットフォームプラグインや Qt5Compat がない：Qt プラグインと QML モジュールを配布物に含めます。
@@ -107,4 +105,4 @@ bash scripts/package_linux.sh
 
 [テーマ](/ja/core/theme)、[ユーティリティ](/ja/core/utils)、[設定と Rust/QML 連携](rust-host)も参照してください。
 
-[rinui-host resources.rs](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/5895b3f/examples/gallery/src/main.rs)
+[rinui-host のリソース実装](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/crates/rinui-host/src/resources.rs) · [Gallery CLI](https://github.com/unDefFtr/rinui-rs/blob/v0.1.0-alpha.2/examples/gallery/src/main.rs)
